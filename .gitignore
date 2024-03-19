@@ -26,6 +26,7 @@ bin/
 
 ### VS Code ###
 .vscode/
+/src/.antlr
 
 ### Mac OS ###
 .DS_Store
