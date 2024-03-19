@@ -15,7 +15,6 @@ func trainModel(model, data) -> {
             epoch--; 
             continue; 
         }
-        x = 1 mod 2;
         epoch = epoch + 1; 
     }
     return model; 
