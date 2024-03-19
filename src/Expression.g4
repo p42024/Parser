@@ -6,6 +6,7 @@ expr:
     expr binary_op expr
     | 'not' expr
     | '(' expr ')'
+    | arithmetic_expr
     | function_call
     | ID
     | BOOL

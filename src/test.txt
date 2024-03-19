@@ -1,35 +1,48 @@
-import "/training" as trainingData;
-import "/testing" as testingData;
+import "/training" as trainingData; // Import statement
+import "/testing" as testingData; // Import statement
+import MNIST as model; // Import statement
 
-import MNIST as model;
-
-func trainModel(model, data) -> {
-    epoch = 0;
-    loop {
-        accuracy, loss = model(data, SGD);
-        if accuracy >= 0.95 {
-            break;
+func trainModel(model, data) -> { // Function definition
+    epoch = 0; 
+    loop { 
+        accuracy, loss = model(data, SGD); 
+        if accuracy >= 0.95 { 
+            break; 
+        } else {
+            if epoch > 3 {
+                epoch *= 10;
+            }
+            epoch--; 
+            continue; 
         }
-        epoch = epoch + 1;
+        x = 1 mod 2;
+        epoch = epoch + 1; 
     }
-    return model;
+    return model; 
 }
 
-func testModel(model, data) -> {
+func testModel(model, data) -> { 
     accuracy, loss = model(data);
-    return accuracy;
-    /*
-    comment her og der 
-    */
+    if accuracy < 0.8 { 
+        model = trainModel(model, data); 
+        accuracy = testModel(model, data);
+    }
+    return accuracy; 
+
 }
 
-m1 = Sigmoid -> 10; //test comment hehehehehe
-m2 = ReLU -> 20; //hehehehe
-m3 = m1 -> m2;
+m1 = Sigmoid -> 10; 
+m2 = ReLU -> 20; 
+m3 = m1 -> m2; 
 
-trainedModel = trainModel(m3, trainingData);
+trainedModel = trainModel(m3, trainingData); // Assignment
 
-accuracy = testModel(trainedModel, testingData);
+accuracy = testModel(trainedModel, testingData); // Assignment
 
-// et eller andet output her msske
-// print maske eller noget (error fordi det er end of file og der er ikke en newline :())
+func gcd(a, b) -> {
+    if b == 0 {
+        return a;
+    } else {
+        return gcd(b, a mod b);
+    }
+}
