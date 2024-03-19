@@ -5,7 +5,8 @@ import Loop, If, Arithmetic,Function;
 prog: stmt+;
 
 stmt:
-    if_stmt
+    import_stmt
+    | if_stmt
     | assignment
     | loop_stmt
     | break_stmt
@@ -13,6 +14,8 @@ stmt:
     | decrement_stmt
     | continue_stmt
     | function_def;
+
+import_stmt: 'import' (STRING | 'MNIST') 'as' ID ';';
 
 assignment:
     ID (',' ID)* ('=' | '*=' | '+=' | '-=' | '/=') (
@@ -55,7 +58,7 @@ expr:
     | FLOAT
     | INT;
 
-
+STRING: '"' ~["]* '"'; //Skal kun bruges til import der er sikkert en smarterer måde
 ID: [a-zA-Z]+ [a-zA-Z_0-9]*;
 ACTIVATION: 'ReLU' | 'Sigmoid';
 BOOL: 'true' | 'false';
