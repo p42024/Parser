@@ -15,7 +15,7 @@ m6 = Sigmoid -> 10 + 2;
 m7 = ReLU -> 10 * (2 + 1);
 
 loop {  
-   @nbsp accuracy, loss_result = m7(data, SGD);  
+    accuracy, loss_result = m7(data, SGD);  
     if accuracy <= 0.95 {  
         break;  
     }  
