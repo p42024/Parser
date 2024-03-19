@@ -1,50 +1,35 @@
-import "/datating" as y;
-import MNIST as x;
+import "/training" as trainingData;
+import "/testing" as testingData;
 
-// Function to calculate sum
-func sum(x, y) -> {
-    result = x + y;
-    func sus(y) -> {
-        x = y;
-        x++;
-        return x;
+import MNIST as model;
+
+func trainModel(model, data) -> {
+    epoch = 0;
+    loop {
+        accuracy, loss = model(data, SGD);
+        if accuracy >= 0.95 {
+            break;
+        }
+        epoch = epoch + 1;
     }
-    m1 = Sigmoid -> 10;
-    return m1;
+    return model;
 }
 
-if x > 2 and not y {
-    x = x+1;
-    x = x-1;
-    x *= 2;
-    x /= 2;
-    y -= 3;
-    y += 3;
+func testModel(model, data) -> {
+    accuracy, loss = model(data);
+    return accuracy;
+    /*
+    comment her og der 
+    */
 }
 
-m1 = Sigmoid -> 10;
-
-m2 = ReLU -> 20;
-
+m1 = Sigmoid -> 10; //test comment hehehehehe
+m2 = ReLU -> 20; //hehehehe
 m3 = m1 -> m2;
 
-m4 = [m1, m2];
+trainedModel = trainModel(m3, trainingData);
 
-m5 = m3 * 2;
+accuracy = testModel(trainedModel, testingData);
 
-m6 = Sigmoid -> 10 + 2 -> ReLU -> 2*2;
-
-m7 = ReLU -> 10 * (2 + 1);
-
-loop {
-    accuracy, loss_result = m7(data, SGD);
-    if accuracy <= 0.95 {
-        break;
-    } else {
-        continue;
-    }
-    epoch++;
-    if epoch == 10 {
-        break;
-    }
-}
+// et eller andet output her msske
+// print maske eller noget (error fordi det er end of file og der er ikke en newline :())

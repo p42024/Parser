@@ -1,6 +1,6 @@
 grammar Statement;
 
-import Loop, If, Arithmetic, Function, Model, Expression;
+import Loop, If, Arithmetic, Function, Model, Expression, Assignment;
 
 prog: stmt+;
 
@@ -17,28 +17,20 @@ stmt:
 
 import_stmt: 'import' (STRING | 'MNIST') 'as' ID ';';
 
-assignment:
-    ID (',' ID)* ('=' | '*=' | '+=' | '-=' | '/=') (
-        function_call
-        | model
-        | arithmetic_expr
-        | ID (',' ID)*
-    ) ';';
-
 increment_stmt: ID '++' ';';
 
 decrement_stmt: ID '--' ';';
 
+//Todoings for andreas eller noget, find ud af hvordan token imports fungere ordenligt så
+// jeg kan smide det her i en anden fill det er ugly duckly
 
-//Man kan putte det her ind i en lexer fil så skal man bare lave noget option magic
-
-STRING: '"' ~["]* '"'; //Skal kun bruges til import der er sikkert en smarterer måde
+STRING: '"' ~["]* '"';
 ID: [a-zA-Z]+ [a-zA-Z_0-9]*;
 ACTIVATION: 'ReLU' | 'Sigmoid';
 BOOL: 'true' | 'false';
 FLOAT: [0-9]* '.' [0-9]+;
 INT: [0-9]+;
 
-COMMENT: '//' .*? '\n' -> skip;
+COMMENT: '//' .*? ('\n' | EOF) -> skip;
 MULTI_LINE_COMMENT: '/*' .*? '*/' -> skip;
 WS: [ \t\r\n]+ -> skip;

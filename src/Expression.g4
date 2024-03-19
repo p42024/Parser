@@ -3,18 +3,13 @@ grammar Expression;
 import Statement;
 
 expr:
-    expr 'and' expr
-    | expr 'or' expr
+    expr binary_op expr
     | 'not' expr
-    | expr '==' expr
-    | expr '>=' expr
-    | expr '<=' expr
-    | expr '<' expr
-    | expr '>' expr
-    | expr '!=' expr
     | '(' expr ')'
     | function_call
     | ID
     | BOOL
     | FLOAT
     | INT;
+
+binary_op: 'and' | 'or' | '==' | '>=' | '<=' | '<' | '>' | '!=';
