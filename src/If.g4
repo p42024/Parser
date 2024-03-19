@@ -1,5 +1,5 @@
 grammar If;
 
-import Grammer;
+import Statement;
 
 if_stmt: 'if' expr '{' stmt+ '}' ('else' '{' stmt+ '}')?;

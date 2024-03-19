@@ -1,6 +1,6 @@
 grammar Loop;
 
-import Grammer;
+import Statement;
 
 loop_stmt: 'loop' '{' stmt+ '}';
 

@@ -1,6 +1,6 @@
 grammar Function;
 
-import Grammer;
+import Statement;
 
 function_def: 'func' ID '(' (ID (',' ID)*)? ')' '->' '{' stmt* 'return' expr ';' '}';
 
