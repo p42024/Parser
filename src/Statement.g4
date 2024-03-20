@@ -22,7 +22,7 @@ increment_stmt: ID '++' ';';
 
 decrement_stmt: ID '--' ';';
 
-return_stmt: 'return' expr ';'
+return_stmt: 'return' expr ';';
 
 //Todoings for andreas eller noget, find ud af hvordan token imports fungere ordenligt så
 // jeg kan smide det her i en anden fill det er ugly duckly
