@@ -1,3 +1,4 @@
+```ts
 import "/training" as trainingData; 
 import "/testing" as testingData; 
 import MNIST as model;
@@ -62,4 +63,4 @@ m6 = combineModels(repeatModel(m1, 2), combineModels(repeatModel(m2, 2), repeatM
 trainedModel = trainModel(m6, trainingData); 
 
 accuracy = testModel(trainedModel, testingData);
-
+```
