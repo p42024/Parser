@@ -1,6 +1,6 @@
 Test input
 ```python
-//This is a comment
+// This is a comment
 /* This is
 *  a
 *  multi-line
