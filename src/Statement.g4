@@ -2,7 +2,7 @@ grammar Statement;
 
 import Loop, If, Arithmetic, Function, Model, Expression, Assignment;
 
-prog: stmt+;
+prog: stmt* EOF;
 
 stmt:
     import_stmt
