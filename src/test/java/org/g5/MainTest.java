@@ -2,12 +2,15 @@ package org.g5;
 
 import org.antlr.v4.runtime.Token;
 import org.g5.parser.GrammarLexer;
+import org.g5.parser.GrammarParser;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import org.antlr.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -93,6 +96,21 @@ public class MainTest {
         catch (Exception e) {
             System.err.println("Either couldn't read/find or parse the test file!");
             assertTrue(false);
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    public void OperationPrecedenceTestOne() {
+        try {
+            // Get the lexer
+            CharStream charStream = CharStreams.fromFileName("testfiles/OperationPrecedenceTestOne");
+            GrammarLexer lexer = new GrammarLexer(charStream);
+            GrammarParser parser = new GrammarParser(new CommonTokenStream(lexer));
+            String tree = parser.program().toStringTree(parser);
+            System.out.println(tree);
+        }
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
