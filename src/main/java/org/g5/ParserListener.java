@@ -4,12 +4,30 @@ import org.g5.parser.GrammarBaseListener;
 import org.g5.parser.GrammarParser;
 
 public class ParserListener extends GrammarBaseListener {
-    @Override public void enterAssignment(GrammarParser.AssignmentContext ctx) {
-        System.out.println(ctx.start);
-        System.out.println(ctx.stop);
+    private StringBuilder code = new StringBuilder();
+
+    @Override
+    public void enterStatement(GrammarParser.StatementContext ctx) {
+
     }
 
-    @Override public void exitAssignment(GrammarParser.AssignmentContext ctx) {
-        System.out.println(ctx.expression().start);
+    @Override
+    public void enterAssignment(GrammarParser.AssignmentContext ctx) {
+        String id = ctx.ID(0).getText();
+        code.append(id).append(" = ");
+    }
+
+    @Override
+    public void exitAssignment(GrammarParser.AssignmentContext ctx) {
+        code.append(";\n");
+    }
+
+    @Override
+    public void enterArithmetic(GrammarParser.ArithmeticContext ctx) {
+        code.append(ctx.getText());
+    }
+
+    public String getCode() {
+        return code.toString();
     }
 }
