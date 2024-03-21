@@ -23,8 +23,9 @@
         </dependency>
     </dependencies>
 
-
     <properties>
+        <!-- Allows project execution with 'mvn clean compile exec:java' -->
+        <exec.mainClass>org.g5.Main</exec.mainClass>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
