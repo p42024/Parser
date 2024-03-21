@@ -1,4 +1,4 @@
-package org.g5.parser;// Generated from C:/Users/heyoa/Desktop/git/Parser/Grammar.g4 by ANTLR 4.13.1
+// Generated from C:/Users/heyoa/Desktop/git/Parser/Grammar.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**

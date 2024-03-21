@@ -1,4 +1,4 @@
-package org.g5.parser;// Generated from C:/Users/heyoa/Desktop/git/Parser/Grammar.g4 by ANTLR 4.13.1
+// Generated from C:/Users/heyoa/Desktop/git/Parser/Grammar.g4 by ANTLR 4.13.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -16,9 +16,7 @@ public class GrammarBaseListener implements GrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterProgram(GrammarParser.ProgramContext ctx) {
-
-	}
+	@Override public void enterProgram(GrammarParser.ProgramContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -30,8 +28,7 @@ public class GrammarBaseListener implements GrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStmt(GrammarParser.StmtContext ctx) {
-	}
+	@Override public void enterStmt(GrammarParser.StmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

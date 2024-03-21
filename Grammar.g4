@@ -1,84 +1,38 @@
 grammar Grammar;
-program: statement* EOF ;
 
-statement:  assignment
-         |  if
-         |  loop
-         |  break_return
-         |  expression
-         ;
+import Loop, If, Arithmetic, Function, Model, Expression, Assignment;
 
-block_statement: '{' statement* '}';
+program: stmt+;
 
-assignment: ID (',' ID)* '=' expression DELIMITER
-          | ID '=' '{' expression '}'
-          ;
+stmt:
+    import_stmt
+    | if_stmt
+    | assignment
+    | loop_stmt
+    | break_stmt
+    | increment_stmt
+    | decrement_stmt
+    | continue_stmt
+    | function_def
+    | return_stmt;
 
-expression: expression conditional_operator expression
-          | ID
-          | ACTIVATION
-          | number
-          | model
-          | arithmetic
-          | function_call
-          | '(' expression ')'
-          ;
+import_stmt: 'import' (STRING | 'MNIST') 'as' ID ';';
 
-// Function call
-function_call: ID '(' (expression)? (',' expression)* ')';
+increment_stmt: ID '++' ';';
 
-// Model
-ACTIVATION: 'Sigmoid'
-          | 'ReLU'
-          | 'Tanh'
-          ;
+decrement_stmt: ID '--' ';';
 
-model_chaining_options: ACTIVATION | INT | ID | model_combiner | arithmetic;
+return_stmt: 'return' expr ';';
 
-model_chaining: model_chaining_options '->' model_chaining_options;
+//Todoings for andreas eller noget, find ud af hvordan token imports fungere ordenligt så
+// jeg kan smide det her i en anden fill det er ugly duckly
+STRING: '"' ~["]* '"';
+ID: [a-zA-Z]+ [a-zA-Z_0-9]*;
+ACTIVATION: 'ReLU' | 'Sigmoid';
+BOOL: 'true' | 'false';
+FLOAT: [0-9]* '.' [0-9]+;
+INT: [0-9]+;
 
-model: model_chaining | ACTIVATION | ID | model_combiner;
-
-model_combiner: '[' model (',' model)* ']';
-
-// Break / return
-break_return: 'break' DELIMITER | 'return' expression DELIMITER;
-
-// If
-if: 'if' expression block_statement ('else' block_statement)?;
-
-// Loop
-loop: 'loop' '{' statement* '}';
-
-// Condition
-conditional_operator: 'and' | 'or' | '!=' | '==' | '>=' | '<=' | '>' | '<';
-
-// Arithmetic
-arithmetic: number
-          | ID
-          | model_combiner
-          | arithmetic ARITHMETIC_OPERATORS arithmetic
-          | '(' arithmetic ARITHMETIC_OPERATORS arithmetic ')'
-          ;
-
-ARITHMETIC_OPERATORS: '-' | '+' | '*' | '/' ;
-
-// Comments
-MULTI_LINE_COMMENT: '/*'.*?'*/'             -> skip;
-SINGLE_COMMENT:     '//' ~( '\r' | '\n' )*  -> skip;
-
-// Types
-FLOAT: [0-9]*[.][0-9]+;
-
-INT: [0-9]+ ;
-
-number: INT | FLOAT;
-
-// Variable names
-ID: [a-zA-Z_][a-zA-Z0-9_']* ;
-
-// Ignore characters
-NEWLINE: [ \t\r\n] -> skip ;
-
-// Other
-DELIMITER: ';';
+COMMENT: '//' .*? ('\n' | EOF) -> skip;
+MULTI_LINE_COMMENT: '/*' .*? '*/' -> skip;
+WS: [ \t\r\n]+ -> skip;
