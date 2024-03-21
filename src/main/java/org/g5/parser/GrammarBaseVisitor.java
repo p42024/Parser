@@ -1,4 +1,4 @@
-// Generated from C:/Users/madsh/projects/Parser/Grammar.g4 by ANTLR 4.13.1
+// Generated from C:/Users/Mads Byriel/projects/Parser/Grammar.g4 by ANTLR 4.13.1
 package org.g5.parser;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -138,4 +138,11 @@ public class GrammarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitArithmetic_operators(GrammarParser.Arithmetic_operatorsContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitBoolean(GrammarParser.BooleanContext ctx) { return visitChildren(ctx); }
 }

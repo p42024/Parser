@@ -1,4 +1,4 @@
-// Generated from C:/Users/madsh/projects/Parser/Grammar.g4 by ANTLR 4.13.1
+// Generated from C:/Users/Mads Byriel/projects/Parser/Grammar.g4 by ANTLR 4.13.1
 package org.g5.parser;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -118,4 +118,10 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitArithmetic_operators(GrammarParser.Arithmetic_operatorsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#boolean}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBoolean(GrammarParser.BooleanContext ctx);
 }

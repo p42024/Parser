@@ -1,4 +1,4 @@
-// Generated from C:/Users/madsh/projects/Parser/Grammar.g4 by ANTLR 4.13.1
+// Generated from C:/Users/Mads Byriel/projects/Parser/Grammar.g4 by ANTLR 4.13.1
 package org.g5.parser;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -187,4 +187,14 @@ public interface GrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitArithmetic_operators(GrammarParser.Arithmetic_operatorsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#boolean}.
+	 * @param ctx the parse tree
+	 */
+	void enterBoolean(GrammarParser.BooleanContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#boolean}.
+	 * @param ctx the parse tree
+	 */
+	void exitBoolean(GrammarParser.BooleanContext ctx);
 }

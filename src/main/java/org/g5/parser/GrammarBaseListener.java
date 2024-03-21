@@ -1,4 +1,4 @@
-// Generated from C:/Users/madsh/projects/Parser/Grammar.g4 by ANTLR 4.13.1
+// Generated from C:/Users/Mads Byriel/projects/Parser/Grammar.g4 by ANTLR 4.13.1
 package org.g5.parser;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -228,6 +228,18 @@ public class GrammarBaseListener implements GrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitArithmetic_operators(GrammarParser.Arithmetic_operatorsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBoolean(GrammarParser.BooleanContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBoolean(GrammarParser.BooleanContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
