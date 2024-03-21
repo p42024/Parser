@@ -48,7 +48,6 @@ public class MainTest {
                 return;
             }
             else {
-
                 // Print some useful information to the error log.
                 System.err.println("The tokens received did not match the tokens expected!");
                 System.err.println("Expected:");
@@ -102,7 +101,8 @@ public class MainTest {
     public void IfTestOne() {
         // The expected tokens from the file.
         String[] expected = {
-            "IF", "OPEN_PAREN", "TRUE", "AND",
+            "IF", "NOT", "OPEN_PAREN",
+            "TRUE", "AND",
             "FALSE", "CLOSED_PAREN", "OPEN_BRACK",
             "ID", "ASSIGN", "SIGMOID",
             "ARROW", "INT", "DELIMITER",

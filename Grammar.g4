@@ -11,7 +11,7 @@ statement:  assignment
 block_statement: OPEN_BRACK statement* CLOSE_BRACK ;
 
 assignment: ID (COMMA ID)* ASSIGN expression DELIMITER
-          | ID ASSIGN OPEN_BRACK expression CLOSE_BRACK
+          | ID ASSIGN OPEN_BRACK expression CLOSE_BRACK // TODO: is this not outdated?
           ;
 
 expression: expression conditional_operator expression
@@ -22,6 +22,7 @@ expression: expression conditional_operator expression
           | arithmetic
           | boolean
           | function_call
+          | NOT expression
           | OPEN_PAREN expression CLOSED_PAREN
           ;
 
@@ -115,6 +116,7 @@ MINUS:  '-';
 PLUS:   '+';
 TIMES:  '*';
 DIV:    '/';
+NOT:    '!';
 
 // Name constant
 ID: [a-zA-Z_][a-zA-Z0-9_']* ;
