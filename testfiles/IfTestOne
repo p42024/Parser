@@ -1,4 +1,4 @@
-if !(true and false) {
+if (true and false) {
     m = Sigmoid -> 10;
 }
 else {
