@@ -25,7 +25,7 @@ public class Main {
             ParseTree tree = parser.program();
             ParseTreeWalker walker = new ParseTreeWalker();
             walker.walk(listener, tree);
-            System.out.println(tree.toStringTree(parser));
+            System.out.println(listener.getCode());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

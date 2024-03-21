@@ -13,18 +13,16 @@ public class ParserListener extends GrammarBaseListener {
 
     @Override
     public void enterAssignment(GrammarParser.AssignmentContext ctx) {
-        String id = ctx.ID(0).getText();
-        code.append(id).append(" = ");
+
     }
 
     @Override
     public void exitAssignment(GrammarParser.AssignmentContext ctx) {
-        code.append(";\n");
     }
 
     @Override
     public void enterArithmetic(GrammarParser.ArithmeticContext ctx) {
-        code.append(ctx.getText());
+
     }
 
     public String getCode() {
