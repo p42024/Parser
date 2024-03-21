@@ -26,9 +26,8 @@ loop {
     accuracy, loss_result = m7(data, SGD);  
     if accuracy <= 0.95 {  
         break;  
-    } else if epoch == 10 {
-        break;
+    } else {
+        epoch = epoch + 1;
     } 
-    epoch = epoch + 1;  
 }  
 ```
