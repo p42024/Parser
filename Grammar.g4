@@ -20,6 +20,7 @@ expression: expression conditional_operator expression
           | number
           | model
           | arithmetic
+          | boolean
           | function_call
           | OPEN_PAREN expression CLOSED_PAREN
           ;
@@ -66,6 +67,8 @@ arithmetic: number
 
 arithmetic_operators: MINUS | PLUS | TIMES | DIV ;
 
+boolean: TRUE | FALSE ;
+
 // CONSTANTS!!!
 
 // Comment constants
@@ -95,6 +98,8 @@ OPEN_SQUARE:    '[';
 CLOSED_SQUARE:  ']';
 BREAK:  'break';
 RETURN: 'return';
+TRUE: 'true';
+FALSE: 'false';
 IF: 'if';
 ELSE: 'else';
 LOOP:   'loop';
