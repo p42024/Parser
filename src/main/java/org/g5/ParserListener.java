@@ -3,13 +3,14 @@ package org.g5;
 import org.g5.parser.GrammarBaseListener;
 import org.g5.parser.GrammarParser;
 
-public class ParserListener extends GrammarBaseListener {
-    @Override public void enterAssignment(GrammarParser.AssignmentContext ctx) {
-        System.out.println(ctx.start);
-        System.out.println(ctx.stop);
-    }
+import static org.g5.Main.parser;
 
+public class ParserListener extends GrammarBaseListener {
     @Override public void exitAssignment(GrammarParser.AssignmentContext ctx) {
-        System.out.println(ctx.expression().start);
+        System.out.println("----- Context Assignment -----");
+        System.out.print(ctx.expression().model() == null ? "" : ctx.expression().model().parent.getText() + "\n");
+        System.out.println(ctx.parent.getText());
+        System.out.println(ctx.toStringTree(parser));
+        System.out.println("-----/ Context Assignment /-----");
     }
 }

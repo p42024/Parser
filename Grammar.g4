@@ -72,44 +72,45 @@ arithmetic_operators: MINUS | PLUS | TIMES | DIV ;
 MULTI_LINE_COMMENT: '/*'.*?'*/'             -> skip;
 SINGLE_COMMENT:     '//' ~( '\r' | '\n' )*  -> skip;
 
+// Ignore characters
+NEWLINE: [ \t\r\n] -> skip ;
+
 // Number constants
 FLOAT: [0-9]*[.][0-9]+;
 INT: [0-9]+ ;
-
-// Name constant
-ID: [a-zA-Z_][a-zA-Z0-9_']* ;
-
-// Ignore characters
-NEWLINE: [ \t\r\n] -> skip ;
 
 // Other
 DELIMITER:      ';';
 OPEN_BRACK:     '{';
 CLOSE_BRACK:    '}';
-COMMA:      ',';
-ASSIGN:     '=';
-OPEN_PAREN: '(' ;
+COMMA:          ',';
+ASSIGN:         '=';
+OPEN_PAREN:     '(' ;
 CLOSED_PAREN:   ')';
 SIGMOID:        'Sigmoid' ;
 RELU:           'ReLU' ;
 TANH:           'Tanh' ;
-ARROW:  '->';
+ARROW:          '->';
 OPEN_SQUARE:    '[';
 CLOSED_SQUARE:  ']';
-BREAK:  'break';
-RETURN: 'return';
-IF: 'if';
-ELSE: 'else';
-LOOP:   'loop';
-AND:    'and';
-OR:     'or';
-NEQ:    '!=';
-EQ:     '==';
-GEQ:    '>=';
-LEQ:    '<=';
-GE:     '>';
-LE:     '<';
-MINUS:  '-';
-PLUS:   '+';
-TIMES:  '*';
-DIV:    '/';
+BREAK:          'break';
+RETURN:         'return';
+IF:             'if';
+ELSE:           'else';
+LOOP:           'loop';
+AND:            'and';
+OR:             'or';
+NEQ:            '!=';
+EQ:             '==';
+GEQ:            '>=';
+LEQ:            '<=';
+GE:             '>';
+LE:             '<';
+MINUS:          '-';
+PLUS:           '+';
+TIMES:          '*';
+DIV:            '/';
+
+
+// Name constant
+ID: [a-zA-Z_][a-zA-Z0-9_']* ;

@@ -9,18 +9,25 @@ import org.g5.parser.GrammarParser;
 import java.io.IOException;
 
 public class Main {
+    public static GrammarParser parser;
     public static void main(String[] args) {
-        readFile("test.nn");
+         CharStream charStream = readFile("test.nn");
+         parseCharStream(charStream);
     }
 
-    public static void readFile(String path) {
-        try {
-            CharStream charStream = CharStreams.fromFileName(path);
-            GrammarLexer lexer = new GrammarLexer(charStream);
-            GrammarParser parser = new GrammarParser(new CommonTokenStream(lexer));
+    public static void parseCharStream(CharStream charStream) {
+        GrammarLexer lexer = new GrammarLexer(charStream);
+        lexer.addErrorListener(new ErrorListener());
+        parser = new GrammarParser(new CommonTokenStream(lexer));
 
-            parser.addParseListener(new ParserListener());
-            parser.program();
+        // parser.addParseListener(new ParserListener());
+        // parser.addErrorListener(new ErrorListener());
+        parser.program();
+    }
+
+    public static CharStream readFile(String path) {
+        try {
+            return CharStreams.fromFileName(path);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
