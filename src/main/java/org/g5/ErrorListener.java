@@ -18,9 +18,6 @@ public class ErrorListener extends BaseErrorListener {
     @Override
     public void reportAmbiguity(Parser recognizer, DFA dfa, int startIndex, int stopIndex, boolean exact, BitSet ambigAlts, ATNConfigSet configs) {
         System.out.println("Ambiguity: " + startIndex + " - " + stopIndex);
-        for (int i = 0; i < stopIndex - startIndex; i++) {
-            System.out.println(dfa.getStates().get(startIndex + i));
-        }
     }
 
     @Override
