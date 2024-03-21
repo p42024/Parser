@@ -1,3 +1,13 @@
 func sum(x,y)->{
+    func double(x)->{
+        return x*2;
+    }
     return y*2;
+}
+
+func double(x)->{
+    func sum(x,y)->{
+        return y*2;
+    }
+    return x*2;
 }
