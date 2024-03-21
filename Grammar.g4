@@ -76,9 +76,6 @@ SINGLE_COMMENT:     '//' ~( '\r' | '\n' )*  -> skip;
 FLOAT: [0-9]*[.][0-9]+;
 INT: [0-9]+ ;
 
-// Name constant
-ID: [a-zA-Z_][a-zA-Z0-9_']* ;
-
 // Ignore characters
 NEWLINE: [ \t\r\n] -> skip ;
 
@@ -113,3 +110,6 @@ MINUS:  '-';
 PLUS:   '+';
 TIMES:  '*';
 DIV:    '/';
+
+// Name constant
+ID: [a-zA-Z_][a-zA-Z0-9_']* ;
