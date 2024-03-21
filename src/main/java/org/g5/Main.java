@@ -3,6 +3,8 @@ package org.g5;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.g5.parser.CustomVisitor;
 import org.g5.parser.GrammarLexer;
 import org.g5.parser.GrammarParser;
 
@@ -20,7 +22,12 @@ public class Main {
             GrammarParser parser = new GrammarParser(new CommonTokenStream(lexer));
 
             parser.addParseListener(new ParserListener());
-            parser.program();
+            ParseTree parseTree = parser.program();
+            System.out.println(parseTree.toStringTree());
+            System.out.println(parseTree.toStringTree(parser));
+            CustomVisitor customVisitor = new CustomVisitor();
+            customVisitor.visit(parseTree);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
