@@ -20,8 +20,8 @@ public class Main {
         lexer.addErrorListener(new ErrorListener());
         parser = new GrammarParser(new CommonTokenStream(lexer));
 
-        // parser.addParseListener(new ParserListener());
-        // parser.addErrorListener(new ErrorListener());
+        parser.addParseListener(new ParserListener());
+        parser.addErrorListener(new ErrorListener());
         parser.program();
     }
 

@@ -2,12 +2,12 @@
 /* This is
 *  a
 *  multi-line
-*/ comment
+*/
 
 m1 = Sigmoid -> 10;
 
 m2 = ReLU -> 20;
-ø
+
 m3 = m1 -> m2;
 
 m4 = [m1, m2];

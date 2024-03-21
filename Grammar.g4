@@ -1,72 +1,98 @@
 grammar Grammar;
 program: statement* EOF ;
 
-statement:  assignment
-         |  if
-         |  loop
-         |  break_return
-         |  expression
+// ---- Statements -----
+
+statement:  single_line_statement DELIMITER #SSingleLine
+         |  multi_line_statement            #SMultiLine
          ;
 
-block_statement: OPEN_BRACK statement* CLOSE_BRACK ;
+multi_line_statement:  loop #MLSLoop
+                    |  if   #MLSIf
+                    ;
 
-assignment: ID (COMMA ID)* ASSIGN expression DELIMITER
-          | ID ASSIGN OPEN_BRACK expression CLOSE_BRACK
-          ;
+single_line_statement: assignment  #SLSAssignment
+                     | BREAK       #SLSBreak
+                     ;
 
-expression: expression conditional_operator expression
-          | ID
-          | activation
-          | number
-          | model
-          | arithmetic
-          | function_call
-          | OPEN_PAREN expression CLOSED_PAREN
-          ;
-
-// Function call
-function_call: ID OPEN_PAREN (expression)? (COMMA expression)* CLOSED_PAREN ;
-
-// Model
-activation: SIGMOID
-          | RELU
-          | TANH
-          ;
-
-model_chaining_options: activation | INT | ID | model_combiner | arithmetic;
-
-model_chaining: model_chaining_options ARROW model_chaining_options;
-
-model: model_chaining | activation | ID | model_combiner;
-
-model_combiner: OPEN_SQUARE model (COMMA model)* CLOSED_SQUARE;
-
-// Break / return
-break_return: BREAK DELIMITER | RETURN expression DELIMITER;
-
+// ----- Control Stuctures -----
 // If
-if: IF expression block_statement (ELSE block_statement)?;
+if: IF conditional_expression block_statement (ELSE block_statement)?;
 
 // Loop
-loop: LOOP OPEN_BRACK statement* CLOSE_BRACK ;
+loop: LOOP block_statement ;
 
-// Condition
-conditional_operator: AND | OR | NEQ | EQ | GEQ | LEQ | GE | LE ;
+// Function
+function_call: ID OPEN_PAREN (function_params)? (COMMA function_params)* CLOSED_PAREN;
+function_params: ID | number | function_call | model_expression | math_expression | conditional_expression;
 
-// numbers
-number: INT | FLOAT;
-
-// Arithmetic
-arithmetic: number
-          | ID
-          | model_combiner
-          | arithmetic arithmetic_operators arithmetic
-          | OPEN_PAREN arithmetic arithmetic_operators arithmetic CLOSED_PAREN
+// Assignment
+assignment: ID             ASSIGN assignable     #AssignAssignable
+          | ID (COMMA ID)* ASSIGN function_call  #AssignFunction
           ;
 
-arithmetic_operators: MINUS | PLUS | TIMES | DIV ;
+assignable: ID                  #AsId
+          | model_expression    #AsModel
+          | math_expression     #AsMath
+          ;
 
-// CONSTANTS!!!
+// ----- Model -----
+model_expression: model_chain    #MExpChain
+                | model_combiner #MExpCombiner
+                ;
+
+model_chain: model_chain ARROW model_chain          #MChain
+           | model_chain_options                    #MVariables
+           | OPEN_PAREN model_chain CLOSED_PAREN    #MScoping
+           ;
+
+model_chain_options: ID                 #MChainId
+                   | ACTIVATION         #MChainActivation
+                   | INT                #MChainInt
+                   | model_combiner     #MChainCombiner
+                   | math_expression    #MChainMath
+                   ;
+
+model_combiner: OPEN_SQUARE model_combiner_options (COMMA model_combiner_options)* CLOSED_SQUARE;
+
+model_combiner_options: ID | model_chain;
+
+// ----- Conditional -----
+conditional_expression:    conditional_expression op=(AND | OR)                       conditional_expression  #BitwiseOperatorChain
+                      |    conditional_expression op=(NEQ | EQ | GEQ | LEQ | GE | LE) conditional_expression  #ComparisonOperatorChain
+                      |    condtional_options                                                                 #ConditionNumberVariable
+                      |    OPEN_PAREN conditional_expression CLOSED_PAREN                                     #ConditionScoping
+                      ;
+
+condtional_options: ID | number | math_expression | model_expression | function_call;
+
+// ----- Math -----
+math_expression:    math_expression op=(MUL | DIV) math_expression  #MathMultiplyDivide
+               |    math_expression op=(ADD | SUB) math_expression  #MathAddSubtract
+               |    math_options                                    #MathNumberVariable
+               |    OPEN_PAREN math_expression CLOSED_PAREN         #MathScoping
+               ;
+
+math_options: ID                #MathId
+            | number            #MathNumber
+            | model_combiner    #MathModel
+            | function_call     #MathFunc
+            ;
+
+// ----- Structures ------
+block_statement: OPEN_BRACK statement* CLOSE_BRACK ;
+
+// return
+/* !! Unnecessary as functions are not definable !! */
+return: RETURN (ID | model_expression | math_expression | function_call) DELIMITER;
+
+// ----- Types -----
+// numbers
+number: INT     #NumInt
+      | FLOAT   #NumFloat
+      ;
+
+// ----- Constants -----
 
 // Comment constants
 MULTI_LINE_COMMENT: '/*'.*?'*/'             -> skip;
@@ -74,6 +100,12 @@ SINGLE_COMMENT:     '//' ~( '\r' | '\n' )*  -> skip;
 
 // Ignore characters
 NEWLINE: [ \t\r\n] -> skip ;
+
+// Activation function constants
+ACTIVATION: SIGMOID
+          | RELU
+          | TANH
+          ;
 
 // Number constants
 FLOAT: [0-9]*[.][0-9]+;
@@ -106,11 +138,11 @@ GEQ:            '>=';
 LEQ:            '<=';
 GE:             '>';
 LE:             '<';
-MINUS:          '-';
-PLUS:           '+';
-TIMES:          '*';
+SUB:            '-';
+ADD:            '+';
+MUL:            '*';
 DIV:            '/';
 
 
 // Name constant
-ID: [a-zA-Z_][a-zA-Z0-9_']* ;
+ID: [a-zA-Z_][a-zA-Z0-9_'-]* ;
