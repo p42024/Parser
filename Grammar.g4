@@ -8,77 +8,108 @@ statement:  assignment
          |  expression
          ;
 
-block_statement: '{' statement* '}';
+block_statement: OPEN_BRACK statement* CLOSE_BRACK ;
 
-assignment: ID (',' ID)* '=' expression DELIMITER
-          | ID '=' '{' expression '}'
+assignment: ID (COMMA ID)* ASSIGN expression DELIMITER
+          | ID ASSIGN OPEN_BRACK expression CLOSE_BRACK
           ;
 
 expression: expression conditional_operator expression
           | ID
-          | ACTIVATION
+          | activation
           | number
           | model
           | arithmetic
           | function_call
-          | '(' expression ')'
+          | OPEN_PAREN expression CLOSED_PAREN
           ;
 
 // Function call
-function_call: ID '(' (expression)? (',' expression)* ')';
+function_call: ID OPEN_PAREN (expression)? (COMMA expression)* CLOSED_PAREN ;
 
 // Model
-ACTIVATION: 'Sigmoid'
-          | 'ReLU'
-          | 'Tanh'
+activation: SIGMOID
+          | RELU
+          | TANH
           ;
 
-model_chaining_options: ACTIVATION | INT | ID | model_combiner | arithmetic;
+model_chaining_options: activation | INT | ID | model_combiner | arithmetic;
 
-model_chaining: model_chaining_options '->' model_chaining_options;
+model_chaining: model_chaining_options ARROW model_chaining_options;
 
-model: model_chaining | ACTIVATION | ID | model_combiner;
+model: model_chaining | activation | ID | model_combiner;
 
-model_combiner: '[' model (',' model)* ']';
+model_combiner: OPEN_SQUARE model (COMMA model)* CLOSED_SQUARE;
 
 // Break / return
-break_return: 'break' DELIMITER | 'return' expression DELIMITER;
+break_return: BREAK DELIMITER | RETURN expression DELIMITER;
 
 // If
-if: 'if' expression block_statement ('else' block_statement)?;
+if: IF expression block_statement (ELSE block_statement)?;
 
 // Loop
-loop: 'loop' '{' statement* '}';
+loop: LOOP OPEN_BRACK statement* CLOSE_BRACK ;
 
 // Condition
-conditional_operator: 'and' | 'or' | '!=' | '==' | '>=' | '<=' | '>' | '<';
+conditional_operator: AND | OR | NEQ | EQ | GEQ | LEQ | GE | LE ;
+
+// numbers
+number: INT | FLOAT;
 
 // Arithmetic
 arithmetic: number
           | ID
           | model_combiner
-          | arithmetic ARITHMETIC_OPERATORS arithmetic
-          | '(' arithmetic ARITHMETIC_OPERATORS arithmetic ')'
+          | arithmetic arithmetic_operators arithmetic
+          | OPEN_PAREN arithmetic arithmetic_operators arithmetic CLOSED_PAREN
           ;
 
-ARITHMETIC_OPERATORS: '-' | '+' | '*' | '/' ;
+arithmetic_operators: MINUS | PLUS | TIMES | DIV ;
 
-// Comments
+// CONSTANTS!!!
+
+// Comment constants
 MULTI_LINE_COMMENT: '/*'.*?'*/'             -> skip;
 SINGLE_COMMENT:     '//' ~( '\r' | '\n' )*  -> skip;
 
-// Types
+// Number constants
 FLOAT: [0-9]*[.][0-9]+;
-
 INT: [0-9]+ ;
 
-number: INT | FLOAT;
-
-// Variable names
+// Name constant
 ID: [a-zA-Z_][a-zA-Z0-9_']* ;
 
 // Ignore characters
 NEWLINE: [ \t\r\n] -> skip ;
 
 // Other
-DELIMITER: ';';
+DELIMITER:      ';';
+OPEN_BRACK:     '{';
+CLOSE_BRACK:    '}';
+COMMA:      ',';
+ASSIGN:     '=';
+OPEN_PAREN: '(' ;
+CLOSED_PAREN:   ')';
+SIGMOID:        'Sigmoid' ;
+RELU:           'ReLU' ;
+TANH:           'Tanh' ;
+ARROW:  '->';
+OPEN_SQUARE:    '[';
+CLOSED_SQUARE:  ']';
+BREAK:  'break';
+RETURN: 'return';
+IF: 'if';
+ELSE: 'else';
+LOOP:   'loop';
+AND:    'and';
+OR:     'or';
+NEQ:    '!=';
+EQ:     '==';
+GEQ:    '>=';
+LEQ:    '<=';
+GE:     '>';
+LE:     '<';
+MINUS:  '-';
+PLUS:   '+';
+TIMES:  '*';
+DIV:    '/';

@@ -1,4 +1,5 @@
-package org.g5.parser;// Generated from C:/Users/mikke/IdeaProjects/project-parser/Grammar.g4 by ANTLR 4.13.1
+// Generated from C:/Users/madsh/projects/Parser/Grammar.g4 by ANTLR 4.13.1
+package org.g5.parser;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -83,6 +84,18 @@ public class GrammarBaseListener implements GrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFunction_call(GrammarParser.Function_callContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterActivation(GrammarParser.ActivationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitActivation(GrammarParser.ActivationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -184,6 +197,18 @@ public class GrammarBaseListener implements GrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterNumber(GrammarParser.NumberContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNumber(GrammarParser.NumberContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterArithmetic(GrammarParser.ArithmeticContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -196,13 +221,13 @@ public class GrammarBaseListener implements GrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNumber(GrammarParser.NumberContext ctx) { }
+	@Override public void enterArithmetic_operators(GrammarParser.Arithmetic_operatorsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNumber(GrammarParser.NumberContext ctx) { }
+	@Override public void exitArithmetic_operators(GrammarParser.Arithmetic_operatorsContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

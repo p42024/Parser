@@ -1,4 +1,5 @@
-package org.g5.parser;// Generated from C:/Users/mikke/IdeaProjects/project-parser/Grammar.g4 by ANTLR 4.13.1
+// Generated from C:/Users/madsh/projects/Parser/Grammar.g4 by ANTLR 4.13.1
+package org.g5.parser;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -66,6 +67,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunction_call(GrammarParser.Function_callContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#activation}.
+	 * @param ctx the parse tree
+	 */
+	void enterActivation(GrammarParser.ActivationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#activation}.
+	 * @param ctx the parse tree
+	 */
+	void exitActivation(GrammarParser.ActivationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#model_chaining_options}.
 	 * @param ctx the parse tree
@@ -147,6 +158,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitConditional_operator(GrammarParser.Conditional_operatorContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GrammarParser#number}.
+	 * @param ctx the parse tree
+	 */
+	void enterNumber(GrammarParser.NumberContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#number}.
+	 * @param ctx the parse tree
+	 */
+	void exitNumber(GrammarParser.NumberContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GrammarParser#arithmetic}.
 	 * @param ctx the parse tree
 	 */
@@ -157,13 +178,13 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitArithmetic(GrammarParser.ArithmeticContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#number}.
+	 * Enter a parse tree produced by {@link GrammarParser#arithmetic_operators}.
 	 * @param ctx the parse tree
 	 */
-	void enterNumber(GrammarParser.NumberContext ctx);
+	void enterArithmetic_operators(GrammarParser.Arithmetic_operatorsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarParser#number}.
+	 * Exit a parse tree produced by {@link GrammarParser#arithmetic_operators}.
 	 * @param ctx the parse tree
 	 */
-	void exitNumber(GrammarParser.NumberContext ctx);
+	void exitArithmetic_operators(GrammarParser.Arithmetic_operatorsContext ctx);
 }
