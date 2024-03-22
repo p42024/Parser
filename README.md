@@ -4,7 +4,7 @@ Test input
 /* This is
 *  a
 *  multi-line
-*/ comment
+*  comment */
 
 m1 = Sigmoid -> 10;
 
