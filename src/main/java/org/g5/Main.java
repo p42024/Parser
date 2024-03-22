@@ -23,12 +23,6 @@ public class Main {
             GrammarLexer lexer = new GrammarLexer(charStream);
             CommonTokenStream tokens = new CommonTokenStream(lexer);
     
-            // Print out the tokens
-            tokens.fill();
-            for (Token token : tokens.getTokens()) {
-                System.out.println(token.toString());
-            }
-    
             GrammarParser parser = new GrammarParser(tokens);
             ParseTree tree = parser.program();
     
@@ -36,7 +30,6 @@ public class Main {
             ParseTreeWalker walker = new ParseTreeWalker();
             walker.walk(listener, tree);
     
-            // Get the Python code
             String pythonCode = listener.getPythonCode();
             System.out.println(pythonCode);
     
