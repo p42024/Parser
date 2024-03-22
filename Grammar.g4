@@ -1,96 +1,44 @@
 grammar Grammar;
 
+// Parser rules
+program: stmt* EOF;
+stmt: modelAssignment | modelExpr | ifStmt | loopStmt | activationAssignment;
 
-program: stmt+;
+expr: expr BIN_OP expr | '(' expr ')' | BOOLEAN | IDENTIFIER | INT | DOUBLE;
+boolExpr: boolExpr '||' boolAndExpr | boolAndExpr;
+boolAndExpr: boolAndExpr '&&' boolEqualityExpr | boolEqualityExpr;
+boolEqualityExpr: boolEqualityExpr ('==' | '!=') boolNotExpr | boolNotExpr;
+boolNotExpr: '!' boolNotExpr | '(' boolExpr ')' | expr;
 
-stmt:
-    import_stmt
-    | if_stmt
-    | assignment
-    | loop_stmt
-    | break_stmt
-    | increment_stmt
-    | decrement_stmt
-    | continue_stmt
-    | function_def
-    | return_stmt;
+modelAssignment : 'Model' IDENTIFIER '=' modelExpr ';';
+modelExpr: modelTypeDef  | IDENTIFIER;
 
-import_stmt: 'import' (STRING | 'MNIST') 'as' ID ';';
+modelTypeDef: modelType '(' modelTypeDefArgs ')' | combineModels | IDENTIFIER exponent? | INT exponent?;
 
-increment_stmt: ID '++' ';';
+modelTypeDefArgs: modelTypeDefArg (',' modelTypeDefArg)* | modelTypeDefArg ('->' modelTypeDefArg)* ;
+modelTypeDefArg: IDENTIFIER | INT | combineModels | modelTypeDef;
 
-decrement_stmt: ID '--' ';';
+combineModels: '[' modelExpr (',' modelExpr)* ']' exponent? | '[' modelExpr ('->' modelExpr)* ']' exponent? | IDENTIFIER exponent;
+modelType: 'Linear' | 'Dense' | 'Sequential' | 'Recurrent';
 
-return_stmt: 'return' expr ';';
+exponent: '^' INT;
 
-if_stmt: 'if' expr '{' stmt+ '}' ('else' '{' stmt+ '}')?;
+ifStmt: 'if' '(' boolExpr ')' '{' stmt* '}'  ('else' '{' stmt* '}')?;
 
-loop_stmt: 'loop' '{' stmt+ '}';
+loopStmt: 'loop' '(' boolExpr ')' '{' stmt* '}';
 
-break_stmt: 'break' ';';
+activationAssignment: IDENTIFIER '.activate' '(' ACTIVATIONFUNCTION ')' ';';
 
-continue_stmt: 'continue' ';';
+ACTIVATIONFUNCTION: 'Sigmoid' | 'ReLU' | 'Tanh' | 'Softmax';
 
-model: model_stmt;
-
-model_stmt: model_term ('->' model_term)*;
-
-model_term: model_factor ('^' INT)?;
-
-model_factor:
-    ID
-    | ACTIVATION
-    | '[' ID (',' ID)* ']'
-    | arithmetic_expr;
-
-function_def: 'func' ID '(' (ID (',' ID)*)? ')' '->' '{' stmt* '}' ;
-
-function_call: ID '(' expr (',' expr)* ')';
-
-expr:
-    | '(' expr ')'
-    | 'not' expr
-    | expr binary_op expr
-    | arithmetic_expr
-    | model
-    | function_call
-    | ID
-    | BOOL
-    | FLOAT
-    | INT;
-
-
-binary_op: 'and' | 'or' | '==' | '>=' | '<=' | '<' | '>' | '!=';
-
-assignment: ID (',' ID)* assignment_op (
-    function_call
-    | arithmetic_expr
-    | ID (',' ID)*
-    | model
-
-) ';';
-
-assignment_op: '=' | '*=' | '+=' | '-=' | '/=';
-
-arithmetic_expr: arithmetic_term (('+' | '-') arithmetic_term)*;
-
-arithmetic_term: arithmetic_factor (('*' | '/' | 'mod') arithmetic_factor)*;
-
-arithmetic_factor:
-    INT
-    | '(' arithmetic_expr ')'
-    | ID
-    | ACTIVATION;
-
-//Todoings for andreas eller noget, find ud af hvordan token imports fungere ordenligt så
-// jeg kan smide det her i en anden fill det er ugly duckly
-STRING: '"' ~["]* '"';
-ID: [a-zA-Z]+ [a-zA-Z_0-9]*;
-ACTIVATION: 'ReLU' | 'Sigmoid';
-BOOL: 'true' | 'false';
-FLOAT: [0-9]* '.' [0-9]+;
+// Lexer rules
+IDENTIFIER: [a-zA-Z_]+[a-zA-Z_0-9]*;
 INT: [0-9]+;
+DOUBLE: [0-9]* '.' [0-9]+;
+BOOLEAN: 'true' | 'false';
 
-COMMENT: '//' .*? ('\n' | EOF) -> skip;
-MULTI_LINE_COMMENT: '/*' .*? '*/' -> skip;
+BIN_OP: '+' | '-' | '*' | '/' | '%' | '==' | '!=' | '<' | '<=' | '>' | '>=' | '&&' | '||';
+
 WS: [ \t\r\n]+ -> skip;
+COMMENT: '/*' .*? '*/' -> skip;
+LINE_COMMENT: '//' .*? '\n' -> skip;
