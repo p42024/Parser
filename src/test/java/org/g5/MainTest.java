@@ -102,17 +102,28 @@ public class MainTest {
 
     @Test
     public void OperationPrecedenceTestOne() {
+        String expected = "(program (statement (assignment m = (expression (arithmetic (arithmetic a) (arithmetic_operators +) (arithmetic (arithmetic a) (arithmetic_operator *) (arithmetic b)))) ;)) <EOF>)";
+
         try {
             // Get the lexer
             CharStream charStream = CharStreams.fromFileName("testfiles/OperationPrecedenceTestOne");
             GrammarLexer lexer = new GrammarLexer(charStream);
             GrammarParser parser = new GrammarParser(new CommonTokenStream(lexer));
             String tree = parser.program().toStringTree(parser);
-            System.out.println(tree);
+            if (expected.equals(tree)) {
+                assertTrue(true);
+            }
+            else {
+                System.err.println("Expected parse tree did not match the given parse tree!");
+                System.err.println("Expected:");
+                System.err.println(expected);
+                System.err.println("Actual tree:");
+                System.err.println(tree);
+
+                assertTrue(false);
+            }
         }
-        catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        catch (Exception e) { }
     }
 
     @Test
