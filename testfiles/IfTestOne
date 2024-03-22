@@ -1,0 +1,6 @@
+if !(true and false) {
+    m = Sigmoid -> 10;
+}
+else {
+    m = Tanh -> 20;
+}
