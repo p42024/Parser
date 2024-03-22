@@ -1,6 +1,5 @@
 grammar Grammar;
 
-import Loop, If, Arithmetic, Function, Model, Expression, Assignment;
 
 program: stmt+;
 
@@ -36,7 +35,7 @@ model: model_stmt;
 
 model_stmt: model_term ('->' model_term)*;
 
-model_term: model_factor ('*' INT)?;
+model_term: model_factor ('^' INT)?;
 
 model_factor:
     ID
