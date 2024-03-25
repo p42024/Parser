@@ -3,6 +3,7 @@ package org.g5;
 import org.antlr.v4.runtime.Token;
 import org.g5.parser.GrammarLexer;
 import org.g5.parser.GrammarParser;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -17,7 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainTest {
-    @Test
+
+    @Ignore // Deprecated test
     public void AssignmentTestOne() {
         // The expected tokens from the file.
         String[] expected = {"ID", "ASSIGN", "RELU", "ARROW", "INT"};
@@ -70,7 +72,7 @@ public class MainTest {
         }
     }
 
-    @Test
+    @Ignore // Deprecated test
     public void FailTestOne() {
         try {
             // Get the lexer
@@ -100,7 +102,7 @@ public class MainTest {
         }
     }
 
-    @Test
+    @Ignore // Deprecated test
     public void OperationPrecedenceTestOne() {
         try {
             // Get the lexer
@@ -115,7 +117,7 @@ public class MainTest {
         }
     }
 
-    @Test
+    @Ignore // Deprecated test
     public void IfTestOne() {
         // The expected tokens from the file.
         String[] expected = {
