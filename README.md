@@ -1,34 +1,16 @@
 Test input
 ```python
-// This is a comment
-/* This is
-*  a
-*  multi-line
-*/ comment
+m1 = linear (5, 3);
 
-m1 = Sigmoid -> 10;
+m2 = linear (3, 5);
 
-m2 = ReLU -> 20;
+m3 = sequential (m1 -> ReLU -> m2);
 
-m3 = m1 -> m2;
+m4 = sequential (m3 -> Sigmoid -> linear (4, 3));
 
-m4 = [m1, m2];
+m5 = sequential (m3 -> Tanh -> m3);
 
-m5 = m3 * 2;
+m6 = recurrent (3, 5, dementia);
 
-m6 = Sigmoid -> 10 + 2;
-
-m7 = ReLU -> 10 * ((2 + 1) - 1);
-
-m8 = [m5, m6] * 3;
-
-loop {  
-    accuracy, loss_result = m7(data, SGD);  
-    if accuracy <= 0.95 {  
-        break;  
-    } else if epoch == 10 {
-        break;
-    } 
-    epoch = epoch + 1;  
-}  
+m7 = sequential (m5 -> m6);
 ```
