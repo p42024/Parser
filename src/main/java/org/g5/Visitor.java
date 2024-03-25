@@ -14,6 +14,7 @@ import org.g5.parser.GrammarParser.ExpressionContext;
 import org.g5.parser.GrammarParser.IdContext;
 import org.g5.parser.GrammarParser.IntContext;
 import org.g5.parser.GrammarParser.LinearLayerContext;
+import org.g5.parser.GrammarParser.RecurrentLayerContext;
 import org.g5.parser.GrammarParser.ReluContext;
 import org.g5.parser.GrammarParser.SequentialContainerContext;
 import org.g5.parser.GrammarParser.SigmoidContext;
@@ -25,6 +26,9 @@ public class Visitor extends GrammarBaseVisitor<Object> {
 
     @Override
     public Object visitAssignment(AssignmentContext ctx) {
+        // Goal of this function is to update the value table and evaluate the expression on the rhs.
+        // Rhs is evaluated by traversing the parse tree of expressions.
+
         String id = null;
         Object value = null;
 
@@ -48,24 +52,10 @@ public class Visitor extends GrammarBaseVisitor<Object> {
 
                 continue;
             }
-
-            RuntimeException e = new RuntimeException("Received an unexpected tree: " + tree.getClass().toString());
-            try {
-                Logger.LogException(e);
-            } catch (Exception ex) {}
-            throw e;
         }
 
         if (value == null) {
             RuntimeException e = new RuntimeException("Did not receive a value from assignment.");
-            try {
-                Logger.LogException(e);
-            } catch (Exception ex) {}
-            throw e;
-        }
-
-        if (id == null || id.length() == 0) {
-            RuntimeException e = new RuntimeException("Id was empty or null");
             try {
                 Logger.LogException(e);
             } catch (Exception ex) {}
@@ -92,8 +82,20 @@ public class Visitor extends GrammarBaseVisitor<Object> {
     }
 
     @Override
+    public Object visitSequentialContainer(SequentialContainerContext ctx) {
+        return new LinearLayer(10, 10);
+    }
+
+    @Override
+    public Object visitRecurrentLayer(RecurrentLayerContext ctx) {
+        return new LinearLayer(10, 10);
+    }
+
+    @Override
     public Object visitLinearLayer(LinearLayerContext ctx) {
         List<Integer> sizes = new ArrayList<>();
+
+        visit(ctx);
 
         for (ParseTree tree : ctx.children) {
             if (tree.getClass().equals(TerminalNodeImpl.class))

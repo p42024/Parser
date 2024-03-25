@@ -71,17 +71,17 @@ activation
 
 
 relu
-    : RELU
+    : 'ReLU'
     ;
 
 
 tanh
-    : TANH
+    : 'Tanh'
     ;
 
 
 sigmoid
-    : SIGMOID
+    : 'Sigmoid'
     ;
 
 
@@ -91,15 +91,6 @@ int
 
 
 // The constants
-SIGMOID
-    : 'Sigmoid'
-    ;
-TANH
-    : 'Tanh'
-    ;
-RELU
-    : 'ReLU'
-    ;
 INT
     : ('+' | '-')?[0-9]+
     ;

@@ -1,4 +1,4 @@
-m1 = linear (20, 20);
+m1 = linear (20, 20, 20);
 
 m2 = linear (20, 20);
 
