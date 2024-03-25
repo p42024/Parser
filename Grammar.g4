@@ -26,7 +26,7 @@ LINE_COMMENT: '//' .*? '\n' -> skip;
 
 // Program structure
 program: stmt* EOF;
-stmt: modelAssignment | modelExpr | ifStmt | loopStmt | activationAssignment | trainStmt | optimizerAssignment | lossFunctionAssignment | datasetAssignment | activationFunctionAssignment | useStmt | saveStmt | predictStmt;
+stmt: modelAssignment | modelExpr | ifStmt | loopStmt | activationAssignment | trainStmt | optimizerAssignment | lossFunctionAssignment | datasetAssignment | activationFunctionAssignment | useStmt | saveStmt | predictStmt | normalizeStmt;
 
 // Expressions
 expr: arithExpr | '(' expr ')' | BOOLEAN | IDENTIFIER | INT | DOUBLE;
@@ -45,16 +45,17 @@ boolNotExpr: '!' boolEqualityExpr | '(' boolExpr ')';
 // Model definitions
 modelAssignment : 'Model' IDENTIFIER '=' modelExpr ';';
 modelExpr: modelTypeDef  | IDENTIFIER;
-modelTypeDef: modelType '(' modelTypeDefArgs ')' | combineModels | IDENTIFIER combineExponent? | INT combineExponent?;
-modelTypeDefArgs: modelTypeDefArg (',' modelTypeDefArg)* | modelTypeDefArg ('->' modelTypeDefArg)* ;
+modelTypeDef: modelType '(' modelTypeDefArgs ',' activationFunctionExpr ')' | combineModels | IDENTIFIER combineExponent? | INT combineExponent?;
+modelTypeDefArgs: modelTypeDefArg (',' modelTypeDefArg)* | modelTypeDefArg ('->' modelTypeDefArg)*;
 modelTypeDefArg: IDENTIFIER | INT | combineModels | modelTypeDef | arithExpr;
 combineModels: '[' modelExpr (',' modelExpr)* ']' combineExponent? | '[' modelExpr ('->' modelExpr)* ']' combineExponent? | IDENTIFIER exponent;
-modelType: 'Linear' | 'Dense' | 'Sequential' | 'Recurrent';
+modelType: 'Linear' | 'Sequential';
 
 // Use, save, and predict statements
 useStmt: IDENTIFIER '.use' '(' IDENTIFIER ')' ';';
 saveStmt: IDENTIFIER '.save' '(' STRING ')' ';';
 predictStmt: IDENTIFIER '.predict' '(' IDENTIFIER ')' ';';
+normalizeStmt: IDENTIFIER '.normalize' '(' ')' ';';
 
 // Control structures
 ifStmt: 'if' '(' boolExpr ')' '{' stmt* '}'  ('else' '{' stmt* '}')?;
