@@ -23,17 +23,17 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStatement(GrammarParser.StatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GrammarParser#block_statement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBlock_statement(GrammarParser.Block_statementContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link GrammarParser#assignment}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitAssignment(GrammarParser.AssignmentContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#id}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitId(GrammarParser.IdContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GrammarParser#expression}.
 	 * @param ctx the parse tree
@@ -41,11 +41,41 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpression(GrammarParser.ExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GrammarParser#function_call}.
+	 * Visit a parse tree produced by {@link GrammarParser#variable}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunction_call(GrammarParser.Function_callContext ctx);
+	T visitVariable(GrammarParser.VariableContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#modelLayer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitModelLayer(GrammarParser.ModelLayerContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#linearLayer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLinearLayer(GrammarParser.LinearLayerContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#recurrentLayer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRecurrentLayer(GrammarParser.RecurrentLayerContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#modelContainer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitModelContainer(GrammarParser.ModelContainerContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#sequentialContainer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSequentialContainer(GrammarParser.SequentialContainerContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GrammarParser#activation}.
 	 * @param ctx the parse tree
@@ -53,75 +83,27 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitActivation(GrammarParser.ActivationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GrammarParser#model_chaining_options}.
+	 * Visit a parse tree produced by {@link GrammarParser#relu}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitModel_chaining_options(GrammarParser.Model_chaining_optionsContext ctx);
+	T visitRelu(GrammarParser.ReluContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GrammarParser#model_chaining}.
+	 * Visit a parse tree produced by {@link GrammarParser#tanh}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitModel_chaining(GrammarParser.Model_chainingContext ctx);
+	T visitTanh(GrammarParser.TanhContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GrammarParser#model}.
+	 * Visit a parse tree produced by {@link GrammarParser#sigmoid}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitModel(GrammarParser.ModelContext ctx);
+	T visitSigmoid(GrammarParser.SigmoidContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GrammarParser#model_combiner}.
+	 * Visit a parse tree produced by {@link GrammarParser#int}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitModel_combiner(GrammarParser.Model_combinerContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link GrammarParser#break_return}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBreak_return(GrammarParser.Break_returnContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link GrammarParser#if}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIf(GrammarParser.IfContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link GrammarParser#loop}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLoop(GrammarParser.LoopContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link GrammarParser#conditional_operator}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitConditional_operator(GrammarParser.Conditional_operatorContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link GrammarParser#number}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNumber(GrammarParser.NumberContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link GrammarParser#arithmetic}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitArithmetic(GrammarParser.ArithmeticContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link GrammarParser#arithmetic_operators}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitArithmetic_operators(GrammarParser.Arithmetic_operatorsContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link GrammarParser#boolean}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBoolean(GrammarParser.BooleanContext ctx);
+	T visitInt(GrammarParser.IntContext ctx);
 }

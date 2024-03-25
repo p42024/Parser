@@ -28,16 +28,6 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitStatement(GrammarParser.StatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#block_statement}.
-	 * @param ctx the parse tree
-	 */
-	void enterBlock_statement(GrammarParser.Block_statementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarParser#block_statement}.
-	 * @param ctx the parse tree
-	 */
-	void exitBlock_statement(GrammarParser.Block_statementContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link GrammarParser#assignment}.
 	 * @param ctx the parse tree
 	 */
@@ -47,6 +37,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAssignment(GrammarParser.AssignmentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#id}.
+	 * @param ctx the parse tree
+	 */
+	void enterId(GrammarParser.IdContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#id}.
+	 * @param ctx the parse tree
+	 */
+	void exitId(GrammarParser.IdContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#expression}.
 	 * @param ctx the parse tree
@@ -58,15 +58,65 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitExpression(GrammarParser.ExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#function_call}.
+	 * Enter a parse tree produced by {@link GrammarParser#variable}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunction_call(GrammarParser.Function_callContext ctx);
+	void enterVariable(GrammarParser.VariableContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarParser#function_call}.
+	 * Exit a parse tree produced by {@link GrammarParser#variable}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunction_call(GrammarParser.Function_callContext ctx);
+	void exitVariable(GrammarParser.VariableContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#modelLayer}.
+	 * @param ctx the parse tree
+	 */
+	void enterModelLayer(GrammarParser.ModelLayerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#modelLayer}.
+	 * @param ctx the parse tree
+	 */
+	void exitModelLayer(GrammarParser.ModelLayerContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#linearLayer}.
+	 * @param ctx the parse tree
+	 */
+	void enterLinearLayer(GrammarParser.LinearLayerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#linearLayer}.
+	 * @param ctx the parse tree
+	 */
+	void exitLinearLayer(GrammarParser.LinearLayerContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#recurrentLayer}.
+	 * @param ctx the parse tree
+	 */
+	void enterRecurrentLayer(GrammarParser.RecurrentLayerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#recurrentLayer}.
+	 * @param ctx the parse tree
+	 */
+	void exitRecurrentLayer(GrammarParser.RecurrentLayerContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#modelContainer}.
+	 * @param ctx the parse tree
+	 */
+	void enterModelContainer(GrammarParser.ModelContainerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#modelContainer}.
+	 * @param ctx the parse tree
+	 */
+	void exitModelContainer(GrammarParser.ModelContainerContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#sequentialContainer}.
+	 * @param ctx the parse tree
+	 */
+	void enterSequentialContainer(GrammarParser.SequentialContainerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#sequentialContainer}.
+	 * @param ctx the parse tree
+	 */
+	void exitSequentialContainer(GrammarParser.SequentialContainerContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#activation}.
 	 * @param ctx the parse tree
@@ -78,123 +128,43 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitActivation(GrammarParser.ActivationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#model_chaining_options}.
+	 * Enter a parse tree produced by {@link GrammarParser#relu}.
 	 * @param ctx the parse tree
 	 */
-	void enterModel_chaining_options(GrammarParser.Model_chaining_optionsContext ctx);
+	void enterRelu(GrammarParser.ReluContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarParser#model_chaining_options}.
+	 * Exit a parse tree produced by {@link GrammarParser#relu}.
 	 * @param ctx the parse tree
 	 */
-	void exitModel_chaining_options(GrammarParser.Model_chaining_optionsContext ctx);
+	void exitRelu(GrammarParser.ReluContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#model_chaining}.
+	 * Enter a parse tree produced by {@link GrammarParser#tanh}.
 	 * @param ctx the parse tree
 	 */
-	void enterModel_chaining(GrammarParser.Model_chainingContext ctx);
+	void enterTanh(GrammarParser.TanhContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarParser#model_chaining}.
+	 * Exit a parse tree produced by {@link GrammarParser#tanh}.
 	 * @param ctx the parse tree
 	 */
-	void exitModel_chaining(GrammarParser.Model_chainingContext ctx);
+	void exitTanh(GrammarParser.TanhContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#model}.
+	 * Enter a parse tree produced by {@link GrammarParser#sigmoid}.
 	 * @param ctx the parse tree
 	 */
-	void enterModel(GrammarParser.ModelContext ctx);
+	void enterSigmoid(GrammarParser.SigmoidContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarParser#model}.
+	 * Exit a parse tree produced by {@link GrammarParser#sigmoid}.
 	 * @param ctx the parse tree
 	 */
-	void exitModel(GrammarParser.ModelContext ctx);
+	void exitSigmoid(GrammarParser.SigmoidContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#model_combiner}.
+	 * Enter a parse tree produced by {@link GrammarParser#int}.
 	 * @param ctx the parse tree
 	 */
-	void enterModel_combiner(GrammarParser.Model_combinerContext ctx);
+	void enterInt(GrammarParser.IntContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarParser#model_combiner}.
+	 * Exit a parse tree produced by {@link GrammarParser#int}.
 	 * @param ctx the parse tree
 	 */
-	void exitModel_combiner(GrammarParser.Model_combinerContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GrammarParser#break_return}.
-	 * @param ctx the parse tree
-	 */
-	void enterBreak_return(GrammarParser.Break_returnContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarParser#break_return}.
-	 * @param ctx the parse tree
-	 */
-	void exitBreak_return(GrammarParser.Break_returnContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GrammarParser#if}.
-	 * @param ctx the parse tree
-	 */
-	void enterIf(GrammarParser.IfContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarParser#if}.
-	 * @param ctx the parse tree
-	 */
-	void exitIf(GrammarParser.IfContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GrammarParser#loop}.
-	 * @param ctx the parse tree
-	 */
-	void enterLoop(GrammarParser.LoopContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarParser#loop}.
-	 * @param ctx the parse tree
-	 */
-	void exitLoop(GrammarParser.LoopContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GrammarParser#conditional_operator}.
-	 * @param ctx the parse tree
-	 */
-	void enterConditional_operator(GrammarParser.Conditional_operatorContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarParser#conditional_operator}.
-	 * @param ctx the parse tree
-	 */
-	void exitConditional_operator(GrammarParser.Conditional_operatorContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GrammarParser#number}.
-	 * @param ctx the parse tree
-	 */
-	void enterNumber(GrammarParser.NumberContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarParser#number}.
-	 * @param ctx the parse tree
-	 */
-	void exitNumber(GrammarParser.NumberContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GrammarParser#arithmetic}.
-	 * @param ctx the parse tree
-	 */
-	void enterArithmetic(GrammarParser.ArithmeticContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarParser#arithmetic}.
-	 * @param ctx the parse tree
-	 */
-	void exitArithmetic(GrammarParser.ArithmeticContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GrammarParser#arithmetic_operators}.
-	 * @param ctx the parse tree
-	 */
-	void enterArithmetic_operators(GrammarParser.Arithmetic_operatorsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarParser#arithmetic_operators}.
-	 * @param ctx the parse tree
-	 */
-	void exitArithmetic_operators(GrammarParser.Arithmetic_operatorsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GrammarParser#boolean}.
-	 * @param ctx the parse tree
-	 */
-	void enterBoolean(GrammarParser.BooleanContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarParser#boolean}.
-	 * @param ctx the parse tree
-	 */
-	void exitBoolean(GrammarParser.BooleanContext ctx);
+	void exitInt(GrammarParser.IntContext ctx);
 }
