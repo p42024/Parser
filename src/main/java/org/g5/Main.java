@@ -24,6 +24,9 @@ public class Main {
             GrammarParser parser = new GrammarParser(new CommonTokenStream(lexer));
 
             ParseTree topTree = parser.program();
+
+            Visitor visitor = new Visitor();
+            visitor.visit(topTree);
         }
         catch (IOException e) {
             throw new RuntimeException(e);
