@@ -1,0 +1,4 @@
+training_data = import MNISTDigits;
+test_data = import MNISTDigitsTest;
+training_data_labels = import MNISTDigitsLabels;
+test_data_labels = import MNISTDigitsTestLabels;

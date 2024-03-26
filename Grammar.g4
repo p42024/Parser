@@ -8,9 +8,10 @@ program
 
 statement
     : id '=' expression ';'                         #StatementAssignment
-    | 'loop' expression '{' statement* '}'          #StatementLoop
+    | 'loop' '{' statement* '}'                     #StatementLoop
     | 'break' ';'                                   #StatementBreak
     | 'if' expression '{' statement* '}' else?      #StatementIf
+    | expression ';'                                #StatementExpression
     ;
 
 
@@ -20,20 +21,35 @@ else
 
 
 expression
-    : id                                        #ExpressionId
-    | layer                                     #ExpressionLayer
-    | model                                     #ExpressionModel
-    | '(' expression ')'                        #ExpressionParenthesis
+    : id                                                                #ExpressionId
+    | layer                                                             #ExpressionLayer
+    | model                                                             #ExpressionModel
+    | string                                                            #ExpressionString
+    | int                                                               #ExpressionInteger
+    | float                                                             #ExpressionFloat
+    | arith                                                             #ExpressionArith
+    | '(' expression ')'                                                #ExpressionParenthesis
 
     // Boolean expressions
-    | expression 'and' expression               #ExpressionBooleanAnd
-    | expression 'or' expression                #ExpressionBooleanOr
-    | expression '>' expression                 #ExpressionLe
-    | expression '>=' expression                #ExpressionLeq
-    | expression '<' expression                 #ExpressionGe
-    | expression '<=' expression                #ExpressionGeq
+    | expression 'and' expression                                       #ExpressionBooleanAnd
+    | expression 'or' expression                                        #ExpressionBooleanOr
+    | expression '>' expression                                         #ExpressionLe
+    | expression '>=' expression                                        #ExpressionLeq
+    | expression '<' expression                                         #ExpressionGe
+    | expression '<=' expression                                        #ExpressionGeq
 
-    // Hardcoded function calls
+    // Function calls
+    | 'print' '(' expression ')'                                        #ExpressionPrint
+    | 'calculate_accuracy' '(' expression ',' expression ')'            #ExpressionAccuracy
+    | 'MSE' '(' expression ',' expression ')'                           #ExpressionMSE
+    | 'SGD' '(' expression ',' expression ',' expression ')'            #ExpressionSGD
+    | id '(' expression ')'                                             #ExpressionModelCall
+
+    // Imports
+    | 'import' 'MNISTDigits'                                            #ExpressionImportDigits
+    | 'import' 'MNISTDigitsTest'                                        #ExpressionImportDigitsTest
+    | 'import' 'MNISTDigitsLabels'                                      #ExpressionImportDigitsTest
+    | 'import' 'MNISTDigitsTestLabels'                                  #ExpressionImportDigitsTest
     ;
 
 
@@ -60,7 +76,7 @@ layer
 
 
 linearLayer
-    : 'linear' '(' (arith | int) ',' (arith | int) ')'
+    : 'linear' '(' (arith | int | id) ',' (arith | int | id) ')'
     ;
 
 
@@ -89,6 +105,11 @@ int
     ;
 
 
+string
+    : STRING
+    ;
+
+
 INT
     : [0-9]+
     ;
@@ -104,6 +125,19 @@ ID
     ;
 
 
+STRING
+    : '"' (~["] | '\\"' )* '"'
+    ;
+
+
 WS
     : [ \t\r\n]+ -> skip
+    ;
+
+COMMENT
+    : '//' (~'\n')* -> skip
+    ;
+
+MULTILINECOMMENT
+    : '/*' .*? '*/' -> skip
     ;
