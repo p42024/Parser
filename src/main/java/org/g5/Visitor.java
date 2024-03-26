@@ -4,6 +4,8 @@ import org.g5.parser.GrammarBaseVisitor;
 import org.g5.parser.GrammarParser;
 import org.g5.parser.GrammarParser.StringContext;
 import org.g5.types.Layer;
+import org.g5.types.Model;
+import org.g5.types.SequentialContainer;
 
 public class Visitor extends GrammarBaseVisitor<Object> {
     @Override
@@ -34,7 +36,30 @@ public class Visitor extends GrammarBaseVisitor<Object> {
 
     @Override
     public Object visitStatementAssignment(GrammarParser.StatementAssignmentContext ctx) {
-        System.out.print("---- Assignment ---- \nId: " + ctx.id().getText() + "\nExpressions: " + visitChildren(ctx.expression()) + "\n\n");
+        //System.out.print("---- Assignment ---- \nId: " + ctx.id().getText() + "\nExpressions: " + visitChildren(ctx.expression()) + "\n\n");
         return super.visitStatementAssignment(ctx);
     }
+
+    @Override
+    public String visitActivationReLU(GrammarParser.ActivationReLUContext ctx) {
+        return ctx.getText();
+    }
+
+    @Override
+    public String visitActivationSigmoid(GrammarParser.ActivationSigmoidContext ctx) {
+        return ctx.getText();
+    }
+
+    @Override
+    public String visitActivationTanh(GrammarParser.ActivationTanhContext ctx) {
+        return ctx.getText();
+    }
+
+    @Override
+    public Object visitSequentialContainerModel(GrammarParser.SequentialContainerModelContext ctx) {
+        System.out.println(ctx.layer(0));
+        return new Model(new SequentialContainer(ctx));
+    }
+
+
 }

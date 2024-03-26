@@ -1,4 +1,3 @@
-// Generated from Grammar.g4 by ANTLR 4.13.1
 package org.g5.parser;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -228,7 +227,7 @@ public class GrammarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSequentialContainer(GrammarParser.SequentialContainerContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSequentialContainerModel(GrammarParser.SequentialContainerModelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

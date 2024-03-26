@@ -1,4 +1,3 @@
-// Generated from Grammar.g4 by ANTLR 4.13.1
 package org.g5.parser;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -1389,6 +1388,18 @@ public class GrammarParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class SequentialContainerContext extends ParserRuleContext {
+		public SequentialContainerContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_sequentialContainer; }
+	 
+		public SequentialContainerContext() { }
+		public void copyFrom(SequentialContainerContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class SequentialContainerModelContext extends SequentialContainerContext {
 		public List<LayerContext> layer() {
 			return getRuleContexts(LayerContext.class);
 		}
@@ -1407,21 +1418,18 @@ public class GrammarParser extends Parser {
 		public ActivationContext activation(int i) {
 			return getRuleContext(ActivationContext.class,i);
 		}
-		public SequentialContainerContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_sequentialContainer; }
+		public SequentialContainerModelContext(SequentialContainerContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).enterSequentialContainer(this);
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).enterSequentialContainerModel(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).exitSequentialContainer(this);
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).exitSequentialContainerModel(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof GrammarVisitor ) return ((GrammarVisitor<? extends T>)visitor).visitSequentialContainer(this);
+			if ( visitor instanceof GrammarVisitor ) return ((GrammarVisitor<? extends T>)visitor).visitSequentialContainerModel(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1431,6 +1439,7 @@ public class GrammarParser extends Parser {
 		enterRule(_localctx, 10, RULE_sequentialContainer);
 		int _la;
 		try {
+			_localctx = new SequentialContainerModelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(173);
