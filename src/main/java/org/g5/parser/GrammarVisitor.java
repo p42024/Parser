@@ -1,4 +1,3 @@
-// Generated from Grammar.g4 by ANTLR 4.13.1
 package org.g5.parser;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -218,11 +217,12 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitModel(GrammarParser.ModelContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GrammarParser#sequentialContainer}.
+	 * Visit a parse tree produced by the {@code SequentialContainerModel}
+	 * labeled alternative in {@link GrammarParser#sequentialContainer}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSequentialContainer(GrammarParser.SequentialContainerContext ctx);
+	T visitSequentialContainerModel(GrammarParser.SequentialContainerModelContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ActivationReLU}
 	 * labeled alternative in {@link GrammarParser#activation}.

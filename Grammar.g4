@@ -60,7 +60,7 @@ model
 
 
 sequentialContainer
-    : 'sequential' '(' (layer | id) ('->' activation '->' (layer | id))* ')'
+    : 'sequential' '(' (layer | id) ('->' activation '->' (layer | id))* ')' #SequentialContainerModel
     ;
 
 

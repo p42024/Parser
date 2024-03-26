@@ -1,4 +1,3 @@
-// Generated from Grammar.g4 by ANTLR 4.13.1
 package org.g5.parser;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -362,15 +361,17 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitModel(GrammarParser.ModelContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#sequentialContainer}.
+	 * Enter a parse tree produced by the {@code SequentialContainerModel}
+	 * labeled alternative in {@link GrammarParser#sequentialContainer}.
 	 * @param ctx the parse tree
 	 */
-	void enterSequentialContainer(GrammarParser.SequentialContainerContext ctx);
+	void enterSequentialContainerModel(GrammarParser.SequentialContainerModelContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarParser#sequentialContainer}.
+	 * Exit a parse tree produced by the {@code SequentialContainerModel}
+	 * labeled alternative in {@link GrammarParser#sequentialContainer}.
 	 * @param ctx the parse tree
 	 */
-	void exitSequentialContainer(GrammarParser.SequentialContainerContext ctx);
+	void exitSequentialContainerModel(GrammarParser.SequentialContainerModelContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ActivationReLU}
 	 * labeled alternative in {@link GrammarParser#activation}.

@@ -1,0 +1,1 @@
+seque = sequential(linear(128, 128) -> ReLU -> linear(52, 52));

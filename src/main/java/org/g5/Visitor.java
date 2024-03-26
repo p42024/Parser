@@ -18,6 +18,8 @@ import org.g5.parser.GrammarParser.ChainedArithMultiplicationContext;
 import org.g5.parser.GrammarParser.ChainedArithSubtractionContext;
 import org.g5.parser.GrammarParser.StringContext;
 import org.g5.types.Layer;
+import org.g5.types.Model;
+import org.g5.types.SequentialContainer;
 
 public class Visitor extends GrammarBaseVisitor<Object> {
     @Override
@@ -48,6 +50,7 @@ public class Visitor extends GrammarBaseVisitor<Object> {
 
     @Override
     public Object visitStatementAssignment(GrammarParser.StatementAssignmentContext ctx) {
+        //System.out.print("---- Assignment ---- \nId: " + ctx.id().getText() + "\nExpressions: " + visitChildren(ctx.expression()) + "\n\n");
         return super.visitStatementAssignment(ctx);
     }
 
@@ -70,7 +73,7 @@ public class Visitor extends GrammarBaseVisitor<Object> {
 
         return val1 * val2;
     }
-    
+
     //     | chainedArith op='/' chainedArith          #ChainedArithDivision
     @Override
     public Object visitChainedArithDivision(ChainedArithDivisionContext ctx) {
@@ -79,7 +82,7 @@ public class Visitor extends GrammarBaseVisitor<Object> {
 
         return val1 / val2;
     }
-    
+
     //     | chainedArith op='+' chainedArith          #ChainedArithAddition
     @Override
     public Object visitChainedArithAddition(ChainedArithAdditionContext ctx) {
@@ -141,4 +144,27 @@ public class Visitor extends GrammarBaseVisitor<Object> {
 
         return val1 - val2;
     }
+
+    @Override
+    public String visitActivationReLU(GrammarParser.ActivationReLUContext ctx) {
+        return ctx.getText();
+    }
+
+    @Override
+    public String visitActivationSigmoid(GrammarParser.ActivationSigmoidContext ctx) {
+        return ctx.getText();
+    }
+
+    @Override
+    public String visitActivationTanh(GrammarParser.ActivationTanhContext ctx) {
+        return ctx.getText();
+    }
+
+    @Override
+    public Object visitSequentialContainerModel(GrammarParser.SequentialContainerModelContext ctx) {
+        System.out.println(ctx.layer(0));
+        return new Model(new SequentialContainer(ctx));
+    }
+
+
 }
