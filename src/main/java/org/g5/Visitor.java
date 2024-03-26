@@ -31,7 +31,7 @@ import org.g5.types.LinearLayer;
 import org.g5.types.MultOperation;
 
 public class Visitor extends GrammarBaseVisitor<Object> {
-    @Override
+     @Override
     public String visitString(StringContext ctx) {
         String txt = ctx.getText();
 
