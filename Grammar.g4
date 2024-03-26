@@ -7,11 +7,13 @@ program
 
 
 statement
-    : id '=' expression ';'                         #StatementAssignment
-    | 'loop' '{' statement* '}'                     #StatementLoop
-    | 'break' ';'                                   #StatementBreak
-    | 'if' expression '{' statement* '}' else?      #StatementIf
-    | expression ';'                                #StatementExpression
+    : id '=' expression ';'                                             #StatementAssignment
+    | 'loop' '{' statement* '}'                                         #StatementLoop
+    | 'break' ';'                                                       #StatementBreak
+    | 'if' expression '{' statement* '}' else?                          #StatementIf
+    | 'print' '(' expression ')' ';'                                    #StatementPrint
+    | 'SGD' '(' expression ',' expression ',' expression ')' ';'        #StatementSGD
+    | 'export' expression 'as' (id | string) ';'                        #StatementExport
     ;
 
 
@@ -39,21 +41,16 @@ expression
     | expression '<=' expression                                        #ExpressionGeq
     | expression '==' expression                                        #ExpressionEq
 
-    // Function calls
-    | 'print' '(' expression ')'                                        #ExpressionPrint
-    | 'calculate_accuracy' '(' expression ',' expression ')'            #ExpressionAccuracy
-    | 'MSE' '(' expression ',' expression ')'                           #ExpressionMSE
-    | 'SGD' '(' expression ',' expression ',' expression ')'            #ExpressionSGD
-    | id '(' expression ')'                                             #ExpressionModelCall
-
     // Imports
     | 'import' 'MNISTDigits'                                            #ExpressionImportDigits
     | 'import' 'MNISTDigitsTest'                                        #ExpressionImportDigitsTest
     | 'import' 'MNISTDigitsLabels'                                      #ExpressionImportDigitsTest
     | 'import' 'MNISTDigitsTestLabels'                                  #ExpressionImportDigitsTest
 
-    // Export
-    | 'export' expression 'as' (id | string)                           #ExpressionExport
+    // Functions
+    | 'calculate_accuracy' '(' expression ',' expression ')'            #ExpressionAccuracy
+    | 'MSE' '(' expression ',' expression ')'                           #ExpressionMSE
+    | id '(' expression ')'                                             #ExpressionModelCall
     ;
 
 
@@ -109,6 +106,11 @@ int
     ;
 
 
+float
+    : INT'.'INT
+    ;
+
+
 string
     : STRING
     ;
@@ -116,11 +118,6 @@ string
 
 INT
     : [0-9]+
-    ;
-
-
-float
-    : INT'.'INT
     ;
 
 

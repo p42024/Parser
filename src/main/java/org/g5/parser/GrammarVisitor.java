@@ -45,12 +45,26 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStatementIf(GrammarParser.StatementIfContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code StatementExpression}
+	 * Visit a parse tree produced by the {@code StatementPrint}
 	 * labeled alternative in {@link GrammarParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStatementExpression(GrammarParser.StatementExpressionContext ctx);
+	T visitStatementPrint(GrammarParser.StatementPrintContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code StatementSGD}
+	 * labeled alternative in {@link GrammarParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementSGD(GrammarParser.StatementSGDContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code StatementExport}
+	 * labeled alternative in {@link GrammarParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementExport(GrammarParser.StatementExportContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GrammarParser#else}.
 	 * @param ctx the parse tree
@@ -86,13 +100,6 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpressionInteger(GrammarParser.ExpressionIntegerContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code ExpressionExport}
-	 * labeled alternative in {@link GrammarParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpressionExport(GrammarParser.ExpressionExportContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code ExpressionLeq}
 	 * labeled alternative in {@link GrammarParser#expression}.
 	 * @param ctx the parse tree
@@ -114,13 +121,6 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpressionBooleanOr(GrammarParser.ExpressionBooleanOrContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code ExpressionPrint}
-	 * labeled alternative in {@link GrammarParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpressionPrint(GrammarParser.ExpressionPrintContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code ExpressionParenthesis}
 	 * labeled alternative in {@link GrammarParser#expression}.
 	 * @param ctx the parse tree
@@ -141,13 +141,6 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExpressionMSE(GrammarParser.ExpressionMSEContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code ExpressionSGD}
-	 * labeled alternative in {@link GrammarParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpressionSGD(GrammarParser.ExpressionSGDContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ExpressionGeq}
 	 * labeled alternative in {@link GrammarParser#expression}.
@@ -288,15 +281,15 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInt(GrammarParser.IntContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GrammarParser#string}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitString(GrammarParser.StringContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link GrammarParser#float}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitFloat(GrammarParser.FloatContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#string}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitString(GrammarParser.StringContext ctx);
 }

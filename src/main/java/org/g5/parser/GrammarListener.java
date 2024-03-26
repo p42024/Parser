@@ -66,17 +66,41 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitStatementIf(GrammarParser.StatementIfContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code StatementExpression}
+	 * Enter a parse tree produced by the {@code StatementPrint}
 	 * labeled alternative in {@link GrammarParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterStatementExpression(GrammarParser.StatementExpressionContext ctx);
+	void enterStatementPrint(GrammarParser.StatementPrintContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code StatementExpression}
+	 * Exit a parse tree produced by the {@code StatementPrint}
 	 * labeled alternative in {@link GrammarParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitStatementExpression(GrammarParser.StatementExpressionContext ctx);
+	void exitStatementPrint(GrammarParser.StatementPrintContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code StatementSGD}
+	 * labeled alternative in {@link GrammarParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatementSGD(GrammarParser.StatementSGDContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code StatementSGD}
+	 * labeled alternative in {@link GrammarParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatementSGD(GrammarParser.StatementSGDContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code StatementExport}
+	 * labeled alternative in {@link GrammarParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatementExport(GrammarParser.StatementExportContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code StatementExport}
+	 * labeled alternative in {@link GrammarParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatementExport(GrammarParser.StatementExportContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#else}.
 	 * @param ctx the parse tree
@@ -136,18 +160,6 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitExpressionInteger(GrammarParser.ExpressionIntegerContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ExpressionExport}
-	 * labeled alternative in {@link GrammarParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterExpressionExport(GrammarParser.ExpressionExportContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code ExpressionExport}
-	 * labeled alternative in {@link GrammarParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitExpressionExport(GrammarParser.ExpressionExportContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code ExpressionLeq}
 	 * labeled alternative in {@link GrammarParser#expression}.
 	 * @param ctx the parse tree
@@ -184,18 +196,6 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitExpressionBooleanOr(GrammarParser.ExpressionBooleanOrContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ExpressionPrint}
-	 * labeled alternative in {@link GrammarParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterExpressionPrint(GrammarParser.ExpressionPrintContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code ExpressionPrint}
-	 * labeled alternative in {@link GrammarParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitExpressionPrint(GrammarParser.ExpressionPrintContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code ExpressionParenthesis}
 	 * labeled alternative in {@link GrammarParser#expression}.
 	 * @param ctx the parse tree
@@ -231,18 +231,6 @@ public interface GrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExpressionMSE(GrammarParser.ExpressionMSEContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code ExpressionSGD}
-	 * labeled alternative in {@link GrammarParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterExpressionSGD(GrammarParser.ExpressionSGDContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code ExpressionSGD}
-	 * labeled alternative in {@link GrammarParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitExpressionSGD(GrammarParser.ExpressionSGDContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ExpressionGeq}
 	 * labeled alternative in {@link GrammarParser#expression}.
@@ -480,16 +468,6 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitInt(GrammarParser.IntContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#string}.
-	 * @param ctx the parse tree
-	 */
-	void enterString(GrammarParser.StringContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarParser#string}.
-	 * @param ctx the parse tree
-	 */
-	void exitString(GrammarParser.StringContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link GrammarParser#float}.
 	 * @param ctx the parse tree
 	 */
@@ -499,4 +477,14 @@ public interface GrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFloat(GrammarParser.FloatContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#string}.
+	 * @param ctx the parse tree
+	 */
+	void enterString(GrammarParser.StringContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#string}.
+	 * @param ctx the parse tree
+	 */
+	void exitString(GrammarParser.StringContext ctx);
 }
