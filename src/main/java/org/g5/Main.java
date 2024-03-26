@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
         try {
-            CharStream charStream = CharStreams.fromFileName("testfiles/test_main");
+            CharStream charStream = CharStreams.fromFileName("testfiles/test_arith");
             GrammarLexer lexer = new GrammarLexer(charStream);
             GrammarParser parser = new GrammarParser(new CommonTokenStream(lexer));
 
