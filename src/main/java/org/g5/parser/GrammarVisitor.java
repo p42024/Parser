@@ -1,3 +1,4 @@
+// Generated from C:/Users/mikke/IdeaProjects/Parser/Grammar.g4 by ANTLR 4.13.1
 package org.g5.parser;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -257,12 +258,11 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLinearLayer(GrammarParser.LinearLayerContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code ArithMultiplication}
-	 * labeled alternative in {@link GrammarParser#arith}.
+	 * Visit a parse tree produced by {@link GrammarParser#linearLayerArith}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArithMultiplication(GrammarParser.ArithMultiplicationContext ctx);
+	T visitLinearLayerArith(GrammarParser.LinearLayerArithContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ArithDivision}
 	 * labeled alternative in {@link GrammarParser#arith}.
@@ -270,6 +270,13 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitArithDivision(GrammarParser.ArithDivisionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ArithMultiplication}
+	 * labeled alternative in {@link GrammarParser#arith}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArithMultiplication(GrammarParser.ArithMultiplicationContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ArithAddition}
 	 * labeled alternative in {@link GrammarParser#arith}.
@@ -306,19 +313,19 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitChainedArithInt(GrammarParser.ChainedArithIntContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code ChainedArithMultiplication}
-	 * labeled alternative in {@link GrammarParser#chainedArith}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitChainedArithMultiplication(GrammarParser.ChainedArithMultiplicationContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code ChainedArithDivision}
 	 * labeled alternative in {@link GrammarParser#chainedArith}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitChainedArithDivision(GrammarParser.ChainedArithDivisionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ChainedArithMultiplication}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitChainedArithMultiplication(GrammarParser.ChainedArithMultiplicationContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ChainedArithFloat}
 	 * labeled alternative in {@link GrammarParser#chainedArith}.

@@ -27,9 +27,7 @@ expression
     | layer                                                             #ExpressionLayer
     | model                                                             #ExpressionModel
     | string                                                            #ExpressionString
-    | int                                                               #ExpressionInteger
-    | float                                                             #ExpressionFloat
-    | arith                                                             #ExpressionArith
+    | number                                                            #ExpressionNumber
     | '(' expression ')'                                                #ExpressionParenthesis
 
     // Boolean expressions
@@ -77,31 +75,48 @@ layer
 
 
 linearLayer
-    : 'linear' '(' (arith | int | id) ',' (arith | int | id) ')'
+    : 'linear' '(' linearLayerArith ',' linearLayerArith ')'
     ;
 
-
-arith
-    : chainedArith op='*' chainedArith        #ArithMultiplication
-    | chainedArith op='/' chainedArith        #ArithDivision
-    | chainedArith op='+' chainedArith        #ArithAddition
-    | chainedArith op='-' chainedArith        #ArithSubtraction
+linearLayerArith
+    : (number | id)
     ;
-
-
-chainedArith
-    : chainedArith op='*' chainedArith          #ChainedArithMultiplication
-    | chainedArith op='/' chainedArith          #ChainedArithDivision
-    | chainedArith op='+' chainedArith          #ChainedArithAddition
-    | chainedArith op='-' chainedArith          #ChainedArithSubtraction
-    | id                                        #ChainedArithId
-    | int                                       #ChainedArithInt
-    | float                                     #ChainedArithFloat
-    ;
-
 
 id
     : ID
+    ;
+
+
+string
+    : STRING
+    ;
+
+
+number
+    : additive          #NumberMath
+    | numberConstant    #NumberNumberConstant
+    ;
+
+
+multiplicative
+    : numberConstant (multOp numberConstant)*
+    ;
+
+
+multOp
+    : '/'   #MultOpDivision
+    | '*'   #MultOpMultiplication
+    ;
+
+
+additive
+    : multiplicative (addOp multiplicative)*
+    ;
+
+
+addOp
+    : '+'   #AddOpAdd
+    | '-'   #AddOpSub
     ;
 
 
@@ -111,17 +126,25 @@ int
 
 
 float
-    : INT'.'INT
+    : FLOAT
     ;
 
 
-string
-    : STRING
+numberConstant
+    : id                #NumberConstantId
+    | int               #NumberConstantInt
+    | float             #NumberConstantFloat
+    | '(' number ')'    #NumberConstantParenthesis
     ;
 
 
 INT
     : ('-')?[0-9]+
+    ;
+
+
+FLOAT
+    : '-'?[0-9]+'.'[0-9]+
     ;
 
 
