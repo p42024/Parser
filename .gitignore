@@ -30,5 +30,8 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-### Ignore builds! ###
+### Ignore builds ###
 target/
+
+### Ignore error logs ###
+logs/

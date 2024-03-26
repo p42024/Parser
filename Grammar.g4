@@ -1,84 +1,148 @@
 grammar Grammar;
-program: statement* EOF ;
 
-statement:  assignment
-         |  if
-         |  loop
-         |  break_return
-         |  expression
-         ;
 
-block_statement: '{' statement* '}';
+program
+    : statement* EOF
+    ;
 
-assignment: ID (',' ID)* '=' expression DELIMITER
-          | ID '=' '{' expression '}'
-          ;
 
-expression: expression conditional_operator expression
-          | ID
-          | ACTIVATION
-          | number
-          | model
-          | arithmetic
-          | function_call
-          | '(' expression ')'
-          ;
+statement
+    : id '=' expression ';'                                             #StatementAssignment
+    | 'loop' '{' statement* '}'                                         #StatementLoop
+    | 'break' ';'                                                       #StatementBreak
+    | 'if' expression '{' statement* '}' else?                          #StatementIf
+    | 'print' '(' expression ')' ';'                                    #StatementPrint
+    | 'SGD' '(' expression ',' expression ',' expression ')' ';'        #StatementSGD
+    | 'export' expression 'as' (id | string) ';'                        #StatementExport
+    ;
 
-// Function call
-function_call: ID '(' (expression)? (',' expression)* ')';
 
-// Model
-ACTIVATION: 'Sigmoid'
-          | 'ReLU'
-          | 'Tanh'
-          ;
+else
+    : 'else' '{' statement* '}'
+    ;
 
-model_chaining_options: ACTIVATION | INT | ID | model_combiner | arithmetic;
 
-model_chaining: model_chaining_options '->' model_chaining_options;
+expression
+    : id                                                                #ExpressionId
+    | layer                                                             #ExpressionLayer
+    | model                                                             #ExpressionModel
+    | string                                                            #ExpressionString
+    | int                                                               #ExpressionInteger
+    | float                                                             #ExpressionFloat
+    | arith                                                             #ExpressionArith
+    | '(' expression ')'                                                #ExpressionParenthesis
 
-model: model_chaining | ACTIVATION | ID | model_combiner;
+    // Boolean expressions
+    | expression 'and' expression                                       #ExpressionBooleanAnd
+    | expression 'or' expression                                        #ExpressionBooleanOr
+    | expression '>' expression                                         #ExpressionLe
+    | expression '>=' expression                                        #ExpressionLeq
+    | expression '<' expression                                         #ExpressionGe
+    | expression '<=' expression                                        #ExpressionGeq
+    | expression '==' expression                                        #ExpressionEq
 
-model_combiner: '[' model (',' model)* ']';
+    // Imports
+    | 'import' 'MNISTDigits'                                            #ExpressionImportDigits
+    | 'import' 'MNISTDigitsTest'                                        #ExpressionImportDigitsTest
+    | 'import' 'MNISTDigitsLabels'                                      #ExpressionImportDigitsTest
+    | 'import' 'MNISTDigitsTestLabels'                                  #ExpressionImportDigitsTest
 
-// Break / return
-break_return: 'break' DELIMITER | 'return' expression DELIMITER;
+    // Functions
+    | 'calculate_accuracy' '(' expression ',' expression ')'            #ExpressionAccuracy
+    | 'MSE' '(' expression ',' expression ')'                           #ExpressionMSE
+    | id '(' expression ')'                                             #ExpressionModelCall
+    ;
 
-// If
-if: 'if' expression block_statement ('else' block_statement)?;
 
-// Loop
-loop: 'loop' '{' statement* '}';
+model
+    : sequentialContainer
+    ;
 
-// Condition
-conditional_operator: 'and' | 'or' | '!=' | '==' | '>=' | '<=' | '>' | '<';
 
-// Arithmetic
-arithmetic: number
-          | ID
-          | model_combiner
-          | arithmetic ARITHMETIC_OPERATORS arithmetic
-          | '(' arithmetic ARITHMETIC_OPERATORS arithmetic ')'
-          ;
+sequentialContainer
+    : 'sequential' '(' (layer | id) ('->' activation '->' (layer | id))* ')' #SequentialContainerModel
+    ;
 
-ARITHMETIC_OPERATORS: '-' | '+' | '*' | '/' ;
 
-// Comments
-MULTI_LINE_COMMENT: '/*'.*?'*/'             -> skip;
-SINGLE_COMMENT:     '//' ~( '\r' | '\n' )*  -> skip;
+activation
+    : 'ReLU'        #ActivationReLU
+    | 'Tanh'        #ActivationTanh
+    | 'Sigmoid'     #ActivationSigmoid
+    ;
 
-// Types
-FLOAT: [0-9]*[.][0-9]+;
 
-INT: [0-9]+ ;
+layer
+    : linearLayer
+    ;
 
-number: INT | FLOAT;
 
-// Variable names
-ID: [a-zA-Z_][a-zA-Z0-9_']* ;
+linearLayer
+    : 'linear' '(' (arith | int | id) ',' (arith | int | id) ')'
+    ;
 
-// Ignore characters
-NEWLINE: [ \t\r\n] -> skip ;
 
-// Other
-DELIMITER: ';';
+arith
+    : chainedArith op='*' chainedArith        #ArithMultiplication
+    | chainedArith op='/' chainedArith        #ArithDivision
+    | chainedArith op='+' chainedArith        #ArithAddition
+    | chainedArith op='-' chainedArith        #ArithSubtraction
+    ;
+
+
+chainedArith
+    : chainedArith op='*' chainedArith          #ChainedArithMultiplication
+    | chainedArith op='/' chainedArith          #ChainedArithDivision
+    | chainedArith op='+' chainedArith          #ChainedArithAddition
+    | chainedArith op='-' chainedArith          #ChainedArithSubtraction
+    | id                                        #ChainedArithId
+    | int                                       #ChainedArithInt
+    | float                                     #ChainedArithFloat
+    ;
+
+
+id
+    : ID
+    ;
+
+
+int
+    : INT
+    ;
+
+
+float
+    : INT'.'INT
+    ;
+
+
+string
+    : STRING
+    ;
+
+
+INT
+    : ('-')?[0-9]+
+    ;
+
+
+ID
+    : [a-zA-Z_][a-zA-Z_0-9]*
+    ;
+
+
+STRING
+    : '"' (~["] | '\\"' )* '"'
+    ;
+
+
+WS
+    : [ \t\r\n]+ -> skip
+    ;
+
+COMMENT
+    : '//' (~'\n')* -> skip
+    ;
+
+MULTILINECOMMENT
+    : '/*' .*? '*/' -> skip
+    ;
