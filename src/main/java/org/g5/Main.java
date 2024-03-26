@@ -18,20 +18,12 @@ import java.util.BitSet;
 
 public class Main {
     public static void main(String[] args) {
-        readFile("test.nn");
-    }
-
-    public static void readFile(String path) {
         try {
-            CharStream charStream = CharStreams.fromFileName(path);
+            CharStream charStream = CharStreams.fromFileName("testfiles/test_main");
             GrammarLexer lexer = new GrammarLexer(charStream);
             GrammarParser parser = new GrammarParser(new CommonTokenStream(lexer));
 
             ParseTree topTree = parser.program();
-            Visitor visitor = new Visitor();
-
-            // Start the visitor
-            visitor.visit(topTree);
         }
         catch (IOException e) {
             throw new RuntimeException(e);

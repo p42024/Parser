@@ -37,6 +37,7 @@ expression
     | expression '>=' expression                                        #ExpressionLeq
     | expression '<' expression                                         #ExpressionGe
     | expression '<=' expression                                        #ExpressionGeq
+    | expression '==' expression                                        #ExpressionEq
 
     // Function calls
     | 'print' '(' expression ')'                                        #ExpressionPrint
@@ -50,6 +51,9 @@ expression
     | 'import' 'MNISTDigitsTest'                                        #ExpressionImportDigitsTest
     | 'import' 'MNISTDigitsLabels'                                      #ExpressionImportDigitsTest
     | 'import' 'MNISTDigitsTestLabels'                                  #ExpressionImportDigitsTest
+
+    // Export
+    | 'export' expression 'as' (id | string)                           #ExpressionExport
     ;
 
 
