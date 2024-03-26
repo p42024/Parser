@@ -39,7 +39,6 @@ public class Visitor extends GrammarBaseVisitor<Object> {
 
             if (expectedType.equals(tree.getClass()) && tree.getClass().equals(IdContext.class)) {
                 expectedType = ExpressionContext.class;
-
                 id = (String)this.visit(tree);
 
                 continue;

@@ -1,18 +1,81 @@
 grammar Grammar;
 
-// Entry point for the parser!
+
 program
     : statement* EOF
     ;
 
 
 statement
-    : assignment
+    : id '=' expression ';'                         #StatementAssignment
+    | 'loop' expression '{' statement* '}'          #StatementLoop
+    | 'break' ';'                                   #StatementBreak
+    | 'if' expression '{' statement* '}' else?      #StatementIf
     ;
 
 
-assignment
-    : id '=' expression ';'
+else
+    : 'else' '{' statement* '}'
+    ;
+
+
+expression
+    : id                                        #ExpressionId
+    | layer                                     #ExpressionLayer
+    | model                                     #ExpressionModel
+    | '(' expression ')'                        #ExpressionParenthesis
+
+    // Boolean expressions
+    | expression 'and' expression               #ExpressionBooleanAnd
+    | expression 'or' expression                #ExpressionBooleanOr
+    | expression '>' expression                 #ExpressionLe
+    | expression '>=' expression                #ExpressionLeq
+    | expression '<' expression                 #ExpressionGe
+    | expression '<=' expression                #ExpressionGeq
+
+    // Hardcoded function calls
+    ;
+
+
+model
+    : sequentialContainer
+    ;
+
+
+sequentialContainer
+    : 'sequential' '(' (layer | id) ('->' activation '->' (layer | id))* ')'
+    ;
+
+
+activation
+    : 'ReLU'        #ActivationReLU
+    | 'Tanh'        #ActivationTanh
+    | 'Sigmoid'     #ActivationSigmoid
+    ;
+
+
+layer
+    : linearLayer
+    ;
+
+
+linearLayer
+    : 'linear' '(' (arith | int) ',' (arith | int) ')'
+    ;
+
+
+arith
+    : chainedArith op=('*' | '/') chainedArith
+    | chainedArith op=('+' | '-') chainedArith
+    ;
+
+
+chainedArith
+    : chainedArith op=('*' | '/') chainedArith
+    | chainedArith op=('+' | '-') chainedArith
+    | id
+    | int
+    | float
     ;
 
 
@@ -21,82 +84,26 @@ id
     ;
 
 
-expression
-    : modelLayer
-    | modelContainer
-    | variable
-    ;
-
-
-variable
-    : id
-    ;
-
-
-// All the differents layers of a model. For now linear and recurrent
-modelLayer
-    : linearLayer
-    | recurrentLayer
-    ;
-
-
-// The linear layer only contains the size of the layer and the expected input size
-linearLayer
-    : 'linear' '(' int ',' int ')'
-    ;
-
-
-// Unsure how this one works
-recurrentLayer
-    : 'recurrent' '(' int ',' int ')'
-    ;
-
-
-modelContainer
-    : sequentialContainer
-    ;
-
-
-// We need to make sure the expressions are a modelLayer type!
-sequentialContainer
-    : 'sequential' '(' expression ('->' activation '->' expression)* ')'
-    ;
-
-
-activation
-    : relu
-    | sigmoid
-    | tanh
-    ;
-
-
-relu
-    : 'ReLU'
-    ;
-
-
-tanh
-    : 'Tanh'
-    ;
-
-
-sigmoid
-    : 'Sigmoid'
-    ;
-
-
 int
     : INT
     ;
 
 
-// The constants
 INT
-    : ('+' | '-')?[0-9]+
+    : [0-9]+
     ;
+
+
+float
+    : INT'.'INT
+    ;
+
+
 ID
-    : [a-zA-Z_][a-zA-Z_0-9]+
+    : [a-zA-Z_][a-zA-Z_0-9]*
     ;
+
+
 WS
     : [ \t\r\n]+ -> skip
     ;

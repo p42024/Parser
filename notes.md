@@ -1,7 +1,8 @@
 # Slagplan
 
 - Blive færdig med grammar
-- Finde ud af om det skal compiles / oversættes
+- Test
+- Transpile
 - Eksempel
 
 ```c
