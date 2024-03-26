@@ -2,7 +2,6 @@ grammar Grammar;
 program: statement* EOF ;
 
 // ---- Statements -----
-
 statement:  single_line_statement DELIMITER #SSingleLine
          |  multi_line_statement            #SMultiLine
          ;
@@ -32,27 +31,42 @@ assignment: ID             ASSIGN assignable     #AssignAssignable
           ;
 
 assignable: ID                  #AsId
+          | number              #AsNum
           | model_expression    #AsModel
           | math_expression     #AsMath
           ;
 
 // ----- Model -----
-model_expression: model_chain    #MExpChain
-                | model_combiner #MExpCombiner
+model_expression: model_chain_begin                        #MExpChain
+                | model_combiner                           #MExpCombiner
+                | INT ARROW (model_combiner | model_chain) #MInitModel
+                | layer                                    #MLayer
+                | model_repeat                             #MRepeat
+                | model_nn                                 #MModelNN
                 ;
+model_chain_begin: model_chain ARROW model_chain;
 
 model_chain: model_chain ARROW model_chain          #MChain
-           | model_chain_options                    #MVariables
-           | OPEN_PAREN model_chain CLOSED_PAREN    #MScoping
+           | model_chain_options                    #MCVariables
+           | OPEN_PAREN model_chain CLOSED_PAREN    #MCScoping
+           | model_repeat                           #MCRepeat
            ;
 
+model_nn: MODELS OPEN_PAREN model_chain CLOSED_PAREN;
+MODELS: 'sequential' | 'convolutional';
+
+layer: LAYERS OPEN_PAREN ('input:' | 'in:')? INT COMMA ('layer:' | 'out:')? INT CLOSED_PAREN;
+
+LAYERS: 'linear' | 'recurrent';
+
 model_chain_options: ID                 #MChainId
-                   | ACTIVATION         #MChainActivation
-                   | INT                #MChainInt
+                   | layer              #MChainLayer
                    | model_combiner     #MChainCombiner
                    | math_expression    #MChainMath
+                   | ACTIVATION         #MChainActivation
                    ;
 
+model_repeat: model_chain_options HAT math;
 model_combiner: OPEN_SQUARE model_combiner_options (COMMA model_combiner_options)* CLOSED_SQUARE;
 
 model_combiner_options: ID | model_chain;
@@ -67,11 +81,15 @@ conditional_expression:    conditional_expression op=(AND | OR)                 
 condtional_options: ID | number | math_expression | model_expression | function_call;
 
 // ----- Math -----
-math_expression:    math_expression op=(MUL | DIV) math_expression  #MathMultiplyDivide
-               |    math_expression op=(ADD | SUB) math_expression  #MathAddSubtract
-               |    math_options                                    #MathNumberVariable
-               |    OPEN_PAREN math_expression CLOSED_PAREN         #MathScoping
+math_expression:    math op=(MUL | DIV) math  #MathEMultiplyDivide
+               |    math op=(ADD | SUB) math  #MathEAddSubtract
                ;
+
+math:    math op=(MUL | DIV) math       #MathMultiplyDivide
+    |    math op=(ADD | SUB) math       #MathAddSubtract
+    |    math_options                   #MathNumberVariable
+    |    OPEN_PAREN math CLOSED_PAREN   #MathScoping
+    ;
 
 math_options: ID                #MathId
             | number            #MathNumber
@@ -142,7 +160,7 @@ SUB:            '-';
 ADD:            '+';
 MUL:            '*';
 DIV:            '/';
-
+HAT:            '^';
 
 // Name constant
 ID: [a-zA-Z_][a-zA-Z0-9_'-]* ;

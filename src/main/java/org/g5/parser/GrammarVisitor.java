@@ -1,4 +1,4 @@
-// Generated from C:/Users/Mikkel/IdeaProjects/Parser/Grammar.g4 by ANTLR 4.13.1
+// Generated from C:/Users/mikke/IdeaProjects/Parser/Grammar.g4 by ANTLR 4.13.1
 package org.g5.parser;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 

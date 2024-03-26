@@ -1,4 +1,4 @@
-// Generated from C:/Users/Mikkel/IdeaProjects/Parser/Grammar.g4 by ANTLR 4.13.1
+// Generated from C:/Users/mikke/IdeaProjects/Parser/Grammar.g4 by ANTLR 4.13.1
 package org.g5.parser;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -1614,8 +1614,8 @@ public class GrammarParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class ConditionScopingContext extends Conditional_expressionContext {
 		public TerminalNode OPEN_PAREN() { return getToken(GrammarParser.OPEN_PAREN, 0); }
-		public Math_expressionContext math_expression() {
-			return getRuleContext(Math_expressionContext.class,0);
+		public Conditional_expressionContext conditional_expression() {
+			return getRuleContext(Conditional_expressionContext.class,0);
 		}
 		public TerminalNode CLOSED_PAREN() { return getToken(GrammarParser.CLOSED_PAREN, 0); }
 		public ConditionScopingContext(Conditional_expressionContext ctx) { copyFrom(ctx); }
@@ -1691,7 +1691,7 @@ public class GrammarParser extends Parser {
 				setState(162);
 				match(OPEN_PAREN);
 				setState(163);
-				math_expression(0);
+				conditional_expression(0);
 				setState(164);
 				match(CLOSED_PAREN);
 				}
@@ -2613,7 +2613,7 @@ public class GrammarParser extends Parser {
 		"\u009e\u009c\u0001\u0000\u0000\u0000\u009e\u009d\u0001\u0000\u0000\u0000"+
 		"\u009f\u001d\u0001\u0000\u0000\u0000\u00a0\u00a1\u0006\u000f\uffff\uffff"+
 		"\u0000\u00a1\u00a7\u0003 \u0010\u0000\u00a2\u00a3\u0005\f\u0000\u0000"+
-		"\u00a3\u00a4\u0003\"\u0011\u0000\u00a4\u00a5\u0005\r\u0000\u0000\u00a5"+
+		"\u00a3\u00a4\u0003\u001e\u000f\u0000\u00a4\u00a5\u0005\r\u0000\u0000\u00a5"+
 		"\u00a7\u0001\u0000\u0000\u0000\u00a6\u00a0\u0001\u0000\u0000\u0000\u00a6"+
 		"\u00a2\u0001\u0000\u0000\u0000\u00a7\u00b0\u0001\u0000\u0000\u0000\u00a8"+
 		"\u00a9\n\u0004\u0000\u0000\u00a9\u00aa\u0007\u0000\u0000\u0000\u00aa\u00af"+
