@@ -1,9 +1,10 @@
 package org.g5;
 
-import java.util.List;
+import org.g5.functions.CalculateAccuracy;
+import org.g5.functions.MSE;
+import org.g5.functions.Print;
+import org.g5.functions.SGD;
 
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.TerminalNodeImpl;
 import org.g5.parser.GrammarBaseVisitor;
 import org.g5.parser.GrammarParser;
 import org.g5.parser.GrammarParser.ArithAdditionContext;
@@ -11,18 +12,15 @@ import org.g5.parser.GrammarParser.ArithDivisionContext;
 import org.g5.parser.GrammarParser.ArithMultiplicationContext;
 import org.g5.parser.GrammarParser.ArithSubtractionContext;
 import org.g5.parser.GrammarParser.ChainedArithAdditionContext;
-import org.g5.parser.GrammarParser.ChainedArithContext;
 import org.g5.parser.GrammarParser.ChainedArithDivisionContext;
-import org.g5.parser.GrammarParser.ChainedArithIdContext;
 import org.g5.parser.GrammarParser.ChainedArithMultiplicationContext;
 import org.g5.parser.GrammarParser.ChainedArithSubtractionContext;
 import org.g5.parser.GrammarParser.StringContext;
-import org.g5.types.Layer;
-import org.g5.types.Model;
 import org.g5.types.SequentialContainer;
+import org.g5.types.LinearLayer;
 
 public class Visitor extends GrammarBaseVisitor<Object> {
-    @Override
+     @Override
     public String visitString(StringContext ctx) {
         String txt = ctx.getText();
 
@@ -33,8 +31,8 @@ public class Visitor extends GrammarBaseVisitor<Object> {
 
     @Override
     public Float visitInt(GrammarParser.IntContext ctx) {
-        Float parsedInteger = Float.parseFloat(ctx.getText());
-        return parsedInteger;
+        Float parsedFloat = Float.parseFloat(ctx.getText());
+        return parsedFloat;
     }
 
     @Override
@@ -44,13 +42,21 @@ public class Visitor extends GrammarBaseVisitor<Object> {
     }
 
     @Override
-    public Layer visitLayer(GrammarParser.LayerContext ctx) {
-        return new Layer(ctx);
+    public LinearLayer visitLinearLayer(GrammarParser.LinearLayerContext ctx) {
+        return new LinearLayer(ctx, this);
     }
 
     @Override
     public Object visitStatementAssignment(GrammarParser.StatementAssignmentContext ctx) {
-        //System.out.print("---- Assignment ---- \nId: " + ctx.id().getText() + "\nExpressions: " + visitChildren(ctx.expression()) + "\n\n");
+        /*
+        System.out.print("---- Assignment ---- \n" +
+                "Id: " + ctx.id().getText() + "\n" +
+                "Expressions: " + visit(ctx.expression()) + "\n" +
+                "Has child: " + ctx.expression().getChildCount() + "\n" +
+                "String: " + ctx.expression().getText() + "\n" +
+                "\n");
+         */
+
         return super.visitStatementAssignment(ctx);
     }
 
@@ -146,6 +152,26 @@ public class Visitor extends GrammarBaseVisitor<Object> {
     }
 
     @Override
+    public CalculateAccuracy visitExpressionAccuracy(GrammarParser.ExpressionAccuracyContext ctx) {
+        return new CalculateAccuracy(ctx, this);
+    }
+
+    @Override
+    public MSE visitExpressionMSE(GrammarParser.ExpressionMSEContext ctx) {
+        return new MSE(ctx, this);
+    }
+
+    @Override
+    public SGD visitStatementSGD(GrammarParser.StatementSGDContext ctx) {
+        return new SGD(ctx, this);
+    }
+
+    @Override
+    public Print visitStatementPrint(GrammarParser.StatementPrintContext ctx) {
+        return new Print(ctx, this);
+    }
+
+    @Override
     public String visitActivationReLU(GrammarParser.ActivationReLUContext ctx) {
         return ctx.getText();
     }
@@ -163,7 +189,7 @@ public class Visitor extends GrammarBaseVisitor<Object> {
     @Override
     public Object visitSequentialContainerModel(GrammarParser.SequentialContainerModelContext ctx) {
         System.out.println(ctx.layer(0));
-        return new Model(new SequentialContainer(ctx));
+        return new SequentialContainer(ctx);
     }
 
 

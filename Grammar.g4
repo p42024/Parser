@@ -77,9 +77,12 @@ layer
 
 
 linearLayer
-    : 'linear' '(' (arith | int | id) ',' (arith | int | id) ')'
+    : 'linear' '(' linearLayerArith ',' linearLayerArith ')'
     ;
 
+linearLayerArith
+    : (arith | int | id)
+    ;
 
 arith
     : chainedArith op='/' chainedArith        #ArithDivision

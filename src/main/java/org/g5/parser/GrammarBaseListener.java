@@ -1,3 +1,4 @@
+// Generated from C:/Users/mikke/IdeaProjects/Parser/Grammar.g4 by ANTLR 4.13.1
 package org.g5.parser;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -448,13 +449,13 @@ public class GrammarBaseListener implements GrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArithMultiplication(GrammarParser.ArithMultiplicationContext ctx) { }
+	@Override public void enterLinearLayerArith(GrammarParser.LinearLayerArithContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArithMultiplication(GrammarParser.ArithMultiplicationContext ctx) { }
+	@Override public void exitLinearLayerArith(GrammarParser.LinearLayerArithContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -467,6 +468,18 @@ public class GrammarBaseListener implements GrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitArithDivision(GrammarParser.ArithDivisionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArithMultiplication(GrammarParser.ArithMultiplicationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArithMultiplication(GrammarParser.ArithMultiplicationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -532,18 +545,6 @@ public class GrammarBaseListener implements GrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterChainedArithMultiplication(GrammarParser.ChainedArithMultiplicationContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitChainedArithMultiplication(GrammarParser.ChainedArithMultiplicationContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterChainedArithDivision(GrammarParser.ChainedArithDivisionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -551,6 +552,18 @@ public class GrammarBaseListener implements GrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitChainedArithDivision(GrammarParser.ChainedArithDivisionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterChainedArithMultiplication(GrammarParser.ChainedArithMultiplicationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitChainedArithMultiplication(GrammarParser.ChainedArithMultiplicationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

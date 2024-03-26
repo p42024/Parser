@@ -1,5 +1,5 @@
+// Generated from C:/Users/mikke/IdeaProjects/Parser/Grammar.g4 by ANTLR 4.13.1
 package org.g5.parser;
-
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -50,7 +50,7 @@ public class GrammarLexer extends Lexer {
 			"'or'", "'>'", "'>='", "'<'", "'<='", "'=='", "'import'", "'MNISTDigits'", 
 			"'MNISTDigitsTest'", "'MNISTDigitsLabels'", "'MNISTDigitsTestLabels'", 
 			"'calculate_accuracy'", "'MSE'", "'sequential'", "'->'", "'ReLU'", "'Tanh'", 
-			"'Sigmoid'", "'linear'", "'*'", "'/'", "'+'", "'-'", "'.'"
+			"'Sigmoid'", "'linear'", "'/'", "'*'", "'+'", "'-'", "'.'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -309,8 +309,8 @@ public class GrammarLexer extends Lexer {
 		"\u0129\u0005l\u0000\u0000\u0129\u012a\u0005i\u0000\u0000\u012a\u012b\u0005"+
 		"n\u0000\u0000\u012b\u012c\u0005e\u0000\u0000\u012c\u012d\u0005a\u0000"+
 		"\u0000\u012d\u012e\u0005r\u0000\u0000\u012eF\u0001\u0000\u0000\u0000\u012f"+
-		"\u0130\u0005*\u0000\u0000\u0130H\u0001\u0000\u0000\u0000\u0131\u0132\u0005"+
-		"/\u0000\u0000\u0132J\u0001\u0000\u0000\u0000\u0133\u0134\u0005+\u0000"+
+		"\u0130\u0005/\u0000\u0000\u0130H\u0001\u0000\u0000\u0000\u0131\u0132\u0005"+
+		"*\u0000\u0000\u0132J\u0001\u0000\u0000\u0000\u0133\u0134\u0005+\u0000"+
 		"\u0000\u0134L\u0001\u0000\u0000\u0000\u0135\u0136\u0005-\u0000\u0000\u0136"+
 		"N\u0001\u0000\u0000\u0000\u0137\u0138\u0005.\u0000\u0000\u0138P\u0001"+
 		"\u0000\u0000\u0000\u0139\u013b\u0005-\u0000\u0000\u013a\u0139\u0001\u0000"+
