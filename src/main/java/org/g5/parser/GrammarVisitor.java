@@ -257,17 +257,82 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLinearLayer(GrammarParser.LinearLayerContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GrammarParser#arith}.
+	 * Visit a parse tree produced by the {@code ArithMultiplication}
+	 * labeled alternative in {@link GrammarParser#arith}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArith(GrammarParser.ArithContext ctx);
+	T visitArithMultiplication(GrammarParser.ArithMultiplicationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GrammarParser#chainedArith}.
+	 * Visit a parse tree produced by the {@code ArithDivision}
+	 * labeled alternative in {@link GrammarParser#arith}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitChainedArith(GrammarParser.ChainedArithContext ctx);
+	T visitArithDivision(GrammarParser.ArithDivisionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ArithAddition}
+	 * labeled alternative in {@link GrammarParser#arith}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArithAddition(GrammarParser.ArithAdditionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ArithSubtraction}
+	 * labeled alternative in {@link GrammarParser#arith}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArithSubtraction(GrammarParser.ArithSubtractionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ChainedArithSubtraction}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitChainedArithSubtraction(GrammarParser.ChainedArithSubtractionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ChainedArithId}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitChainedArithId(GrammarParser.ChainedArithIdContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ChainedArithInt}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitChainedArithInt(GrammarParser.ChainedArithIntContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ChainedArithMultiplication}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitChainedArithMultiplication(GrammarParser.ChainedArithMultiplicationContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ChainedArithDivision}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitChainedArithDivision(GrammarParser.ChainedArithDivisionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ChainedArithFloat}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitChainedArithFloat(GrammarParser.ChainedArithFloatContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ChainedArithAddition}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitChainedArithAddition(GrammarParser.ChainedArithAdditionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GrammarParser#id}.
 	 * @param ctx the parse tree

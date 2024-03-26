@@ -82,17 +82,21 @@ linearLayer
 
 
 arith
-    : chainedArith op=('*' | '/') chainedArith
-    | chainedArith op=('+' | '-') chainedArith
+    : chainedArith op='*' chainedArith        #ArithMultiplication
+    | chainedArith op='/' chainedArith        #ArithDivision
+    | chainedArith op='+' chainedArith        #ArithAddition
+    | chainedArith op='-' chainedArith        #ArithSubtraction
     ;
 
 
 chainedArith
-    : chainedArith op=('*' | '/') chainedArith
-    | chainedArith op=('+' | '-') chainedArith
-    | id
-    | int
-    | float
+    : chainedArith op='*' chainedArith          #ChainedArithMultiplication
+    | chainedArith op='/' chainedArith          #ChainedArithDivision
+    | chainedArith op='+' chainedArith          #ChainedArithAddition
+    | chainedArith op='-' chainedArith          #ChainedArithSubtraction
+    | id                                        #ChainedArithId
+    | int                                       #ChainedArithInt
+    | float                                     #ChainedArithFloat
     ;
 
 
@@ -117,7 +121,7 @@ string
 
 
 INT
-    : [0-9]+
+    : ('-')?[0-9]+
     ;
 
 

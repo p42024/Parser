@@ -14,6 +14,7 @@ public class Visitor extends GrammarBaseVisitor<Object> {
 
     public String visitString(StringContext ctx) {
         String txt = ctx.getText();
+
         txt = txt.substring(1, txt.length() - 1);
 
         return txt;
