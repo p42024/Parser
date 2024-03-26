@@ -9,6 +9,7 @@ public class Visitor extends GrammarBaseVisitor<Object> {
     @Override
     public String visitString(StringContext ctx) {
         String txt = ctx.getText();
+
         txt = txt.substring(1, txt.length() - 1);
 
         return txt;

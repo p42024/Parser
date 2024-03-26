@@ -428,25 +428,137 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitLinearLayer(GrammarParser.LinearLayerContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#arith}.
+	 * Enter a parse tree produced by the {@code ArithMultiplication}
+	 * labeled alternative in {@link GrammarParser#arith}.
 	 * @param ctx the parse tree
 	 */
-	void enterArith(GrammarParser.ArithContext ctx);
+	void enterArithMultiplication(GrammarParser.ArithMultiplicationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarParser#arith}.
+	 * Exit a parse tree produced by the {@code ArithMultiplication}
+	 * labeled alternative in {@link GrammarParser#arith}.
 	 * @param ctx the parse tree
 	 */
-	void exitArith(GrammarParser.ArithContext ctx);
+	void exitArithMultiplication(GrammarParser.ArithMultiplicationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#chainedArith}.
+	 * Enter a parse tree produced by the {@code ArithDivision}
+	 * labeled alternative in {@link GrammarParser#arith}.
 	 * @param ctx the parse tree
 	 */
-	void enterChainedArith(GrammarParser.ChainedArithContext ctx);
+	void enterArithDivision(GrammarParser.ArithDivisionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarParser#chainedArith}.
+	 * Exit a parse tree produced by the {@code ArithDivision}
+	 * labeled alternative in {@link GrammarParser#arith}.
 	 * @param ctx the parse tree
 	 */
-	void exitChainedArith(GrammarParser.ChainedArithContext ctx);
+	void exitArithDivision(GrammarParser.ArithDivisionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ArithAddition}
+	 * labeled alternative in {@link GrammarParser#arith}.
+	 * @param ctx the parse tree
+	 */
+	void enterArithAddition(GrammarParser.ArithAdditionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ArithAddition}
+	 * labeled alternative in {@link GrammarParser#arith}.
+	 * @param ctx the parse tree
+	 */
+	void exitArithAddition(GrammarParser.ArithAdditionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ArithSubtraction}
+	 * labeled alternative in {@link GrammarParser#arith}.
+	 * @param ctx the parse tree
+	 */
+	void enterArithSubtraction(GrammarParser.ArithSubtractionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ArithSubtraction}
+	 * labeled alternative in {@link GrammarParser#arith}.
+	 * @param ctx the parse tree
+	 */
+	void exitArithSubtraction(GrammarParser.ArithSubtractionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ChainedArithSubtraction}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 */
+	void enterChainedArithSubtraction(GrammarParser.ChainedArithSubtractionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ChainedArithSubtraction}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 */
+	void exitChainedArithSubtraction(GrammarParser.ChainedArithSubtractionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ChainedArithId}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 */
+	void enterChainedArithId(GrammarParser.ChainedArithIdContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ChainedArithId}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 */
+	void exitChainedArithId(GrammarParser.ChainedArithIdContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ChainedArithInt}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 */
+	void enterChainedArithInt(GrammarParser.ChainedArithIntContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ChainedArithInt}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 */
+	void exitChainedArithInt(GrammarParser.ChainedArithIntContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ChainedArithMultiplication}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 */
+	void enterChainedArithMultiplication(GrammarParser.ChainedArithMultiplicationContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ChainedArithMultiplication}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 */
+	void exitChainedArithMultiplication(GrammarParser.ChainedArithMultiplicationContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ChainedArithDivision}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 */
+	void enterChainedArithDivision(GrammarParser.ChainedArithDivisionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ChainedArithDivision}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 */
+	void exitChainedArithDivision(GrammarParser.ChainedArithDivisionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ChainedArithFloat}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 */
+	void enterChainedArithFloat(GrammarParser.ChainedArithFloatContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ChainedArithFloat}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 */
+	void exitChainedArithFloat(GrammarParser.ChainedArithFloatContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ChainedArithAddition}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 */
+	void enterChainedArithAddition(GrammarParser.ChainedArithAdditionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ChainedArithAddition}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 */
+	void exitChainedArithAddition(GrammarParser.ChainedArithAdditionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#id}.
 	 * @param ctx the parse tree
