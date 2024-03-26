@@ -1,3 +1,4 @@
+// Generated from C:/Users/mikke/IdeaProjects/Parser/Grammar.g4 by ANTLR 4.13.1
 package org.g5.parser;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -429,17 +430,15 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitLinearLayer(GrammarParser.LinearLayerContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ArithMultiplication}
-	 * labeled alternative in {@link GrammarParser#arith}.
+	 * Enter a parse tree produced by {@link GrammarParser#linearLayerArith}.
 	 * @param ctx the parse tree
 	 */
-	void enterArithMultiplication(GrammarParser.ArithMultiplicationContext ctx);
+	void enterLinearLayerArith(GrammarParser.LinearLayerArithContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code ArithMultiplication}
-	 * labeled alternative in {@link GrammarParser#arith}.
+	 * Exit a parse tree produced by {@link GrammarParser#linearLayerArith}.
 	 * @param ctx the parse tree
 	 */
-	void exitArithMultiplication(GrammarParser.ArithMultiplicationContext ctx);
+	void exitLinearLayerArith(GrammarParser.LinearLayerArithContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ArithDivision}
 	 * labeled alternative in {@link GrammarParser#arith}.
@@ -452,6 +451,18 @@ public interface GrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitArithDivision(GrammarParser.ArithDivisionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ArithMultiplication}
+	 * labeled alternative in {@link GrammarParser#arith}.
+	 * @param ctx the parse tree
+	 */
+	void enterArithMultiplication(GrammarParser.ArithMultiplicationContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ArithMultiplication}
+	 * labeled alternative in {@link GrammarParser#arith}.
+	 * @param ctx the parse tree
+	 */
+	void exitArithMultiplication(GrammarParser.ArithMultiplicationContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ArithAddition}
 	 * labeled alternative in {@link GrammarParser#arith}.
@@ -513,18 +524,6 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitChainedArithInt(GrammarParser.ChainedArithIntContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ChainedArithMultiplication}
-	 * labeled alternative in {@link GrammarParser#chainedArith}.
-	 * @param ctx the parse tree
-	 */
-	void enterChainedArithMultiplication(GrammarParser.ChainedArithMultiplicationContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code ChainedArithMultiplication}
-	 * labeled alternative in {@link GrammarParser#chainedArith}.
-	 * @param ctx the parse tree
-	 */
-	void exitChainedArithMultiplication(GrammarParser.ChainedArithMultiplicationContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code ChainedArithDivision}
 	 * labeled alternative in {@link GrammarParser#chainedArith}.
 	 * @param ctx the parse tree
@@ -536,6 +535,18 @@ public interface GrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitChainedArithDivision(GrammarParser.ChainedArithDivisionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ChainedArithMultiplication}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 */
+	void enterChainedArithMultiplication(GrammarParser.ChainedArithMultiplicationContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ChainedArithMultiplication}
+	 * labeled alternative in {@link GrammarParser#chainedArith}.
+	 * @param ctx the parse tree
+	 */
+	void exitChainedArithMultiplication(GrammarParser.ChainedArithMultiplicationContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ChainedArithFloat}
 	 * labeled alternative in {@link GrammarParser#chainedArith}.
